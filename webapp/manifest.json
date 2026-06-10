@@ -1,0 +1,109 @@
+{
+  "_version": "1.84.0",
+  "sap.app": {
+    "id": "com.example.employeeapp.employeeapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.24.0",
+      "toolsId": "57fb39d2-0bf8-4321-93c5-e06332cd21ef"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.148.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.example.employeeapp.employeeapp.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.example.employeeapp.employeeapp.view",
+        "async": true,
+        "viewPath": "com.example.employeeapp.employeeapp.view"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "employeeList",
+          "target": "employeeList"
+        },
+        {
+          "pattern": "add",
+          "name": "addEmployee",
+          "target": "addEmployee"
+        },
+        {
+          "pattern": "edit/{employeeId}",
+          "name": "editEmployee",
+          "target": "addEmployee"
+        }
+      ],
+      "targets": {
+        "employeeList": {
+          "viewName": "EmployeeList"
+        },
+        "addEmployee": {
+        "viewName": "AddEmployee"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.example.employeeapp.employeeapp.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<mvc:View controllerName="com.example.employeeapp.employeeapp.controller.EmployeeList"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+>
+	<Page id="_IDGenPage" title="Home">
+		<content>
+			<VBox id="_IDGenVBox" class="sapUiSmallMargin">
+				<!-- Header Section  -->
+				<HBox id="_IDGenHBox1"
+				justifyContent="SpaceBetween"
+				alignItems="Center"
+				width="100%"
+				class="sapUiSmallMarginBottom">
+					<VBox id="_IDGenVBox3">
+						<Title id="_IDGenTitle1" text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H2"/>
+					</VBox>
+					<Button id="_IDGenButton"
+					text="Add Employee"
+					icon="sap-icon://add"
+					type="Emphasized"
+					press="onAddEmployee"/>
+					<Button id="_IDGenButton2"
+					text="Reset Data"
+					type="Reject"
+					icon="sap-icon://delete"
+					press="onResetData"/>
+				</HBox>
+				<!-- Search field -->
+				<SearchField id="_IDGenSearchField"
+				width="100%"
+				placeholder="Search employee by name..."
+				liveChange="onSearchEmployee"
+				class="sapUiSmallMarginBottom"
+				/>
+				<!-- Employee List -->
+				<List id="employeeList" items="{/employees}" class="sapUiMediumMarginTop" growing="true"
+				growingScrollToLoad="true"  noDataText="No employees found. Click 'Add Employee' to create one.">
+					<items>
+						<CustomListItem id="_IDGenCustomListItem">
+							<HBox id="_IDGenHBox"
+							width="100%"
+							justifyContent="SpaceBetween"
+							alignItems="Center"
+							class="employeeItem">
+								<HBox id="_IDGenHBox3" alignItems="Center">
+									<Avatar id="_IDGenAvatar"
+									displayShape="Circle"
+									initials="{= ${name}.substring(0,1).toUpperCase() }"
+									class="sapUiTinyMarginEnd"/>
+									<VBox id="_IDGenVBox2">
+										<Title id="_IDGenTitle" text="{name}" level="H5"/>
+										<ObjectStatus id="_IDGenObjectStatus" text="{role}" state="Information"/>
+									</VBox>
+								</HBox>
+								<HBox id="_IDGenHBox4">
+									<Button id="_IDGenButton3"
+									icon="sap-icon://edit"
+									type="Transparent"
+									tooltip="Edit"
+									press="onEditEmployee"
+									class="employeeActionBtn"/>
+									<Button id="_IDGenButton4"
+									icon="sap-icon://delete"
+									type="Transparent"
+									tooltip="Delete"
+									press="onDeleteEmployee"
+									class="employeeActionBtn"/>
+								</HBox>
+							</HBox>
+        		</CustomListItem>
+					</items>
+				</List>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,38 @@
+.employeeCard {
+    border-radius: 12px;
+}
+.employeeCard .sapMPanelContent {
+    padding: 1.5rem;
+}
+/* Enter your custom styles here */
+.employeeItem {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid #0a6ed1;
+    background: #ffffff;
+    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+.employeeItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.375rem 1rem rgba(0,0,0,0.15);
+    background-color: #f8fbff;
+}
+/* add employee button css */
+.sapMBtn:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+/* edit and delete button css */
+.employeeActionBtn {
+    transition: all 0.2s ease;
+}
+.employeeActionBtn:hover {
+    transform: scale(1.1);
+}
+/* employee image css */
+.sapFAvatar:hover {
+    transform: scale(1.08);
+    transition: transform 0.2s ease;
+}
