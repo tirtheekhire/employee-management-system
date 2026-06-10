@@ -18,7 +18,25 @@
 
 ## employeeapp
 
-Simple Employee Manager app with CRUD functionality
+A responsive SAPUI5 Employee Management application.
+
+## Features
+
+- Add Employee
+- Edit Employee
+- Delete Employee
+- Search Employee
+- Local Storage Persistence
+- Responsive Design
+- SAPUI5 MVC Architecture
+
+## Technologies
+
+- SAPUI5
+- SAP Fiori
+- JavaScript
+- XML Views
+- JSON Model
 
 ### Starting the generated app
 
