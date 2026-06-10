@@ -36,7 +36,7 @@ xmlns="sap.m"
 				<List id="employeeList" items="{/employees}" class="sapUiMediumMarginTop" growing="true"
 				growingScrollToLoad="true"  noDataText="No employees found. Click 'Add Employee' to create one.">
 					<items>
-						<CustomListItem id="_IDGenCustomListItem">
+						<CustomListItem id="_IDGenCustomListItem" type="Active" press="onEmployeePress">
 							<HBox id="_IDGenHBox"
 							width="100%"
 							justifyContent="SpaceBetween"
@@ -67,7 +67,7 @@ xmlns="sap.m"
 									class="employeeActionBtn"/>
 								</HBox>
 							</HBox>
-        		</CustomListItem>
+        				</CustomListItem>
 					</items>
 				</List>
 			</VBox>

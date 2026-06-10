@@ -1,0 +1,35 @@
+<mvc:View
+	controllerName="com.example.employeeapp.employeeapp.controller.EmployeeDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+>
+  <Page
+	id="detailsPage"
+	title="Employee Details"
+	showNavButton="true"
+	navButtonPress="onNavBack">
+  	<content>
+			<VBox id="_IDGenVBox4"
+			class="sapUiLargeMargin"
+			alignItems="Center">
+				<Avatar
+				id="employeeAvatar"
+				displayShape="Circle"
+				displaySize="L"
+				initials="{/selectedEmployee/initials}"/>
+				<Title id="employeeName" class="sapUiSmallMarginTop" text="{/selectedEmployee/name}"/>
+				<Text id="employeeRole"  text="{/selectedEmployee/role}" />
+				<ObjectStatus id="_IDGenObjectStatus2"
+				text="Employee ID"
+				state="Information"
+				class="sapUiMediumMarginTop" />
+				<Text id="_IDGenText" text="{/selectedEmployee/id}" />
+        <Button id="_IDGenButton5"
+				text="Edit Employee"
+				type="Emphasized"
+				press="onEditEmployee"
+				class="sapUiMediumMarginTop" />
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

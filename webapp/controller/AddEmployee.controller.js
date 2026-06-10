@@ -58,7 +58,9 @@ sap.ui.define([
       var oNameInput = this.byId("nameInput");
       var oRoleInput = this.byId("roleInput");
       var sName = oNameInput.getValue().trim();
+      sName = this.capitalizeWords(sName);
       var sRole = oRoleInput.getValue().trim();
+      sRole = this.capitalizeWords(sRole);
       var bValid = true;
       if (!sName) {
         oNameInput.setValueState("Error");
@@ -98,6 +100,16 @@ sap.ui.define([
       localStorage.setItem("employees",JSON.stringify(aEmployees));
       oModel.setProperty("/employeeCount",aEmployees.length);
       this.getOwnerComponent().getRouter().navTo("employeeList");
+    },
+
+    capitalizeWords: function (sText) {
+      return sText
+        .toLowerCase()
+        .split(" ")
+        .map(function (word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
     }
   });
 });

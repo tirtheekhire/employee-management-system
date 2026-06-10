@@ -64,7 +64,19 @@ sap.ui.define([
 			oModel.setProperty("/employees", []);
 			oModel.setProperty("/employeeCount", 0);
 			MessageToast.show("Data Cleared");
-		}
+		},
 
+		// click on employee card
+		onEmployeePress: function (oEvent) {
+    	var oEmployee =
+        oEvent.getSource()
+        .getBindingContext()
+        .getObject();
+      this.getOwnerComponent()
+        .getRouter()
+        .navTo("employeeDetails", {
+          employeeId: oEmployee.id
+        });
+		}
   });
 });

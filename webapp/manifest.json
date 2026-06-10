@@ -88,6 +88,11 @@
           "pattern": "edit/{employeeId}",
           "name": "editEmployee",
           "target": "addEmployee"
+        },
+        {
+          "pattern": "details/{employeeId}",
+          "name": "employeeDetails",
+          "target": "employeeDetails"
         }
       ],
       "targets": {
@@ -96,6 +101,9 @@
         },
         "addEmployee": {
         "viewName": "AddEmployee"
+        },
+        "employeeDetails": {
+          "viewName": "EmployeeDetails"
         }
       }
     },
