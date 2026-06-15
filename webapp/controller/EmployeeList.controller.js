@@ -2,9 +2,10 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
+	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MessageBox, MessageToast, Filter, FilterOperator) {
+], function (Controller, MessageBox, MessageToast, Sorter, Filter, FilterOperator) {
   "use strict";
   return Controller.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
@@ -42,6 +43,7 @@ sap.ui.define([
             if (iIndex > -1) {
 							aEmployees.splice(iIndex, 1);
 							oModel.setProperty("/employees", aEmployees);
+							this.getOwnerComponent().updateRoles();
 							localStorage.setItem("employees",JSON.stringify(aEmployees));
 							oModel.setProperty("/employeeCount", aEmployees.length);
 							MessageToast.show("Employee deleted successfully");
@@ -77,6 +79,52 @@ sap.ui.define([
         .navTo("employeeDetails", {
           employeeId: oEmployee.id
         });
-		}
+		},
+
+		// sorting method Ascending order
+		onSortAscending: function () {
+    	var oList = this.byId("employeeList");
+    	var oBinding = oList.getBinding("items");
+    	var oSorter = new Sorter(
+        "name",
+        false
+    	);
+    	oBinding.sort(oSorter);
+    	MessageToast.show("Sorted A-Z");
+		},
+
+		// sorting method Descending order
+		onSortDescending: function () {
+    	var oList = this.byId("employeeList");
+    	var oBinding = oList.getBinding("items");
+    	var oSorter = new Sorter(
+        "name",
+        true
+    	);
+    	oBinding.sort(oSorter);
+    	MessageToast.show("Sorted Z-A");
+		},
+
+		// filter function
+		onRoleFilter: function (oEvent) {
+    	var sRole = oEvent.getSource().getSelectedKey();
+    	var oList = this.byId("employeeList");
+    	var oBinding = oList.getBinding("items");
+    	if (sRole === "ALL") {
+        oBinding.filter([]);
+        return;
+    	}
+    	var oFilter = new Filter(
+        "role",
+        FilterOperator.EQ,
+        sRole
+    	);
+    	oBinding.filter([oFilter]);
+		},
+
+		onAfterRendering: function () {
+    	var oModel = this.getView().getModel();
+    	var oSelect = this.byId("roleFilter");
+		},
   });
 });

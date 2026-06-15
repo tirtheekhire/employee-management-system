@@ -1,6 +1,7 @@
 <mvc:View controllerName="com.example.employeeapp.employeeapp.controller.EmployeeList"
 xmlns:mvc="sap.ui.core.mvc"
 xmlns="sap.m"
+xmlns:core="sap.ui.core"
 >
 	<Page id="_IDGenPage" title="Home">
 		<content>
@@ -10,10 +11,7 @@ xmlns="sap.m"
 				justifyContent="SpaceBetween"
 				alignItems="Center"
 				width="100%"
-				class="sapUiSmallMarginBottom">
-					<VBox id="_IDGenVBox3">
-						<Title id="_IDGenTitle1" text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H2"/>
-					</VBox>
+				class="sapUiSmallMarginTop sapUiSmallMarginBottom">
 					<Button id="_IDGenButton"
 					text="Add Employee"
 					icon="sap-icon://add"
@@ -32,6 +30,33 @@ xmlns="sap.m"
 				liveChange="onSearchEmployee"
 				class="sapUiSmallMarginBottom"
 				/>
+				<HBox id="_IDGenHBox5" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+					<HBox id="_IDGenHBox7" alignItems="Center">
+						<Title id="_IDGenTitle1" text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H2"/>
+					</HBox>
+					<HBox id="_IDGenVBox5" justifyContent="SpaceBetween" alignItems="Center">
+						<Button id="_IDGenButton6"
+						icon="sap-icon://sort-ascending"
+						tooltip="Sort A-Z"
+						press="onSortAscending"
+						class="sapUiTinyMarginEnd"/>
+						<Button id="_IDGenButton7"
+						tooltip="Sort Z-A"
+						icon="sap-icon://sort-descending"
+						press="onSortDescending"/>
+					</HBox>
+					<HBox id="_IDGenHBox6" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+						<Label id="_IDGenLabel2"
+        		text="Role:"
+        		class="sapUiTinyMarginTop"/>
+    				<Select id="roleFilter"
+        		width="180px"
+        		change="onRoleFilter"
+						items="{/roles}">
+							<core:Item key="{key}" text="{text}"/>
+    				</Select>
+					</HBox>
+				</HBox>
 				<!-- Employee List -->
 				<List id="employeeList" items="{/employees}" class="sapUiMediumMarginTop" growing="true"
 				growingScrollToLoad="true"  noDataText="No employees found. Click 'Add Employee' to create one.">

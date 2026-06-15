@@ -87,6 +87,8 @@ sap.ui.define([
           oEmployee.name = sName;
           oEmployee.role = sRole;
         }
+        oModel.setProperty("/employees", aEmployees);
+        this.getOwnerComponent().updateRoles();
         MessageToast.show("Employee Updated Successfully");
       } else {
         aEmployees.push({
@@ -97,6 +99,7 @@ sap.ui.define([
         MessageToast.show("Employee Added Successfully");
       }
       oModel.setProperty("/employees", aEmployees);
+      this.getOwnerComponent().updateRoles();
       localStorage.setItem("employees",JSON.stringify(aEmployees));
       oModel.setProperty("/employeeCount",aEmployees.length);
       this.getOwnerComponent().getRouter().navTo("employeeList");
@@ -110,6 +113,6 @@ sap.ui.define([
             return word.charAt(0).toUpperCase() + word.slice(1);
         })
         .join(" ");
-    }
+    },
   });
 });
