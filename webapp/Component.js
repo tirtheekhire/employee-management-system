@@ -79,6 +79,32 @@ sap.ui.define([
     	oModel.setProperty("/activeCount",iActive);
     	oModel.setProperty("/leaveCount",iLeave);
     	oModel.setProperty("/inactiveCount",iInactive);
+			// employee statistics 
+			var iTotal = aEmployees.length;
+			oModel.setProperty(
+    		"/activePercentage",
+    		iTotal
+        ? Math.round(
+            (iActive / iTotal) * 100
+          )
+        : 0
+			);
+			oModel.setProperty(
+    		"/inactivePercentage",
+    		iTotal
+        ? Math.round(
+            (iInactive / iTotal) * 100
+          )
+        : 0
+			);
+			oModel.setProperty(
+    		"/leavePercentage",
+    		iTotal
+        ? Math.round(
+            (iLeave / iTotal) * 100
+          )
+        : 0
+			);
 		},
   });
 });

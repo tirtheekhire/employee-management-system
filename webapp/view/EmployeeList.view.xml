@@ -29,6 +29,26 @@ xmlns:core="sap.ui.core"
     				<Text text="{/leaveCount}" class="kpiCount"/>
 					</VBox>
 				</HBox>
+				<!-- Employee statistics section -->
+				<Panel headerText="Employee Status Distribution" class="sapUiMediumMarginBottom">
+    			<VBox class="sapUiMediumMargin">
+        		<Label text="Active"/>
+        		<ProgressIndicator
+            percentValue="{/activePercentage}"
+            displayValue="{= ${/activeCount} + ' Employees (' + ${/activePercentage} + '%)'}"
+            state="Success"/>
+        		<Label text="Inactive" class="sapUiSmallMarginTop"/>
+        		<ProgressIndicator
+            percentValue="{/inactivePercentage}"
+            displayValue="{= ${/inactiveCount} + ' Employees (' + ${/inactivePercentage} + '%)'}"
+            state="Error"/>
+        		<Label text="On Leave" class="sapUiSmallMarginTop"/>
+        		<ProgressIndicator
+            percentValue="{/leavePercentage}"
+            displayValue="{= ${/leaveCount} + ' Employees (' + ${/leavePercentage} + '%)'}"
+            state="Warning"/>
+    			</VBox>
+				</Panel>
 				<!-- Employee list title role filter and sorting toolbar -->
 				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
 					<Title text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H3"/>
