@@ -32,9 +32,14 @@ sap.ui.define([
 			var oModel = new sap.ui.model.json.JSONModel({
     			employees: aEmployees,
     			employeeCount: aEmployees.length,
+					activeCount: 0,
+    			leaveCount: 0,
+    			inactiveCount: 0,
 					roles: aRoles
 			});
 			this.setModel(oModel);
+			this.updateRoles();
+			this.updateDashboardCounts();
 			// enable routing
 			this.getRouter().initialize();
 		},
@@ -60,6 +65,20 @@ sap.ui.define([
     	});
 	    oModel.setProperty("/roles", aRoles);
     	oModel.refresh(true);
+			console.log(oModel.getProperty("/roles"));
+		},
+
+		// update dashboard count
+		updateDashboardCounts: function () {
+    	var oModel = this.getModel();
+    	var aEmployees = oModel.getProperty("/employees");
+    	var iActive = aEmployees.filter(e => e.status === "Active").length;
+    	var iLeave = aEmployees.filter(e => e.status === "On Leave").length;
+    	var iInactive = aEmployees.filter(e => e.status === "Inactive").length;
+    	oModel.setProperty("/employeeCount",aEmployees.length);
+    	oModel.setProperty("/activeCount",iActive);
+    	oModel.setProperty("/leaveCount",iLeave);
+    	oModel.setProperty("/inactiveCount",iInactive);
 		},
   });
 });

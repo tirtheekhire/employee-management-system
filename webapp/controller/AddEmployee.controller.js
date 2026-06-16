@@ -57,6 +57,7 @@ sap.ui.define([
     onSaveEmployee: function () {
       var oNameInput = this.byId("nameInput");
       var oRoleInput = this.byId("roleInput");
+      var sStatus = this.byId("statusSelect").getSelectedKey();
       var sName = oNameInput.getValue().trim();
       sName = this.capitalizeWords(sName);
       var sRole = oRoleInput.getValue().trim();
@@ -86,20 +87,24 @@ sap.ui.define([
         if (oEmployee) {
           oEmployee.name = sName;
           oEmployee.role = sRole;
+          oEmployee.status = sStatus;
         }
         oModel.setProperty("/employees", aEmployees);
         this.getOwnerComponent().updateRoles();
+        this.getOwnerComponent().updateDashboardCounts();
         MessageToast.show("Employee Updated Successfully");
       } else {
         aEmployees.push({
             id: Date.now(),
             name: sName,
-            role: sRole
+            role: sRole,
+            status: sStatus
         });
         MessageToast.show("Employee Added Successfully");
       }
       oModel.setProperty("/employees", aEmployees);
       this.getOwnerComponent().updateRoles();
+      this.getOwnerComponent().updateDashboardCounts();
       localStorage.setItem("employees",JSON.stringify(aEmployees));
       oModel.setProperty("/employeeCount",aEmployees.length);
       this.getOwnerComponent().getRouter().navTo("employeeList");

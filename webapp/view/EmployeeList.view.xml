@@ -6,12 +6,51 @@ xmlns:core="sap.ui.core"
 	<Page id="_IDGenPage" title="Home">
 		<content>
 			<VBox id="_IDGenVBox" class="sapUiSmallMargin">
-				<!-- Header Section  -->
-				<HBox id="_IDGenHBox1"
-				justifyContent="SpaceBetween"
-				alignItems="Center"
-				width="100%"
-				class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+			<!-- KPI card layout -->
+				<HBox justifyContent="SpaceAround" wrap="Wrap" class="sapUiMediumMarginBottom">
+					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
+    				<core:Icon src="sap-icon://group" size="2rem"/>
+    				<Title text="Total Employees" level="H5" class="sapUiTinyMarginTop"/>
+    				<Text text="{/employeeCount}" class="kpiCount"/>
+					</VBox>
+					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
+	    			<core:Icon src="sap-icon://accept" size="2rem"/>
+    				<Title text="Active" level="H5" class="sapUiTinyMarginTop"/>
+    				<Text text="{/activeCount}" class="kpiCount"/>
+					</VBox>
+					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
+    				<core:Icon src="sap-icon://decline" size="2rem"/>
+    				<Title text="Inactive" level="H5" class="sapUiTinyMarginTop"/>
+    				<Text text="{/inactiveCount}" class="kpiCount"/>
+					</VBox>
+					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
+    				<core:Icon src="sap-icon://lateness" size="2rem"/>
+    				<Title text="On Leave" level="H5" class="sapUiTinyMarginTop"/>
+    				<Text text="{/leaveCount}" class="kpiCount"/>
+					</VBox>
+				</HBox>
+				<!-- Employee list title role filter and sorting toolbar -->
+				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
+					<Title text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H3"/>
+					<ToolbarSpacer/>
+					<Label text="Role"/>
+					<Select id="roleFilter" width="180px" change="onRoleFilter" items="{/roles}">
+						<items><core:Item key="{key}" text="{text}"/></items>
+					</Select>
+					<Button id="_IDGenButton6"
+					icon="sap-icon://sort-ascending"
+					tooltip="Sort A-Z"
+					press="onSortAscending"
+					class="sapUiTinyMarginEnd"/>
+					<Button id="_IDGenButton7"
+					tooltip="Sort Z-A"
+					icon="sap-icon://sort-descending"
+					press="onSortDescending"/>
+				</OverflowToolbar>
+				<!-- search , add employee and reset button toolbar -->
+				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
+					<SearchField id="_IDGenSearchField" width="55rem" placeholder="Search employee by name..." liveChange="onSearchEmployee"/>
+    			<ToolbarSpacer/>
 					<Button id="_IDGenButton"
 					text="Add Employee"
 					icon="sap-icon://add"
@@ -22,41 +61,7 @@ xmlns:core="sap.ui.core"
 					type="Reject"
 					icon="sap-icon://delete"
 					press="onResetData"/>
-				</HBox>
-				<!-- Search field -->
-				<SearchField id="_IDGenSearchField"
-				width="100%"
-				placeholder="Search employee by name..."
-				liveChange="onSearchEmployee"
-				class="sapUiSmallMarginBottom"
-				/>
-				<HBox id="_IDGenHBox5" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
-					<HBox id="_IDGenHBox7" alignItems="Center">
-						<Title id="_IDGenTitle1" text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H2"/>
-					</HBox>
-					<HBox id="_IDGenVBox5" justifyContent="SpaceBetween" alignItems="Center">
-						<Button id="_IDGenButton6"
-						icon="sap-icon://sort-ascending"
-						tooltip="Sort A-Z"
-						press="onSortAscending"
-						class="sapUiTinyMarginEnd"/>
-						<Button id="_IDGenButton7"
-						tooltip="Sort Z-A"
-						icon="sap-icon://sort-descending"
-						press="onSortDescending"/>
-					</HBox>
-					<HBox id="_IDGenHBox6" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
-						<Label id="_IDGenLabel2"
-        		text="Role:"
-        		class="sapUiTinyMarginTop"/>
-    				<Select id="roleFilter"
-        		width="180px"
-        		change="onRoleFilter"
-						items="{/roles}">
-							<core:Item key="{key}" text="{text}"/>
-    				</Select>
-					</HBox>
-				</HBox>
+				</OverflowToolbar>
 				<!-- Employee List -->
 				<List id="employeeList" items="{/employees}" class="sapUiMediumMarginTop" growing="true"
 				growingScrollToLoad="true"  noDataText="No employees found. Click 'Add Employee' to create one.">
@@ -73,8 +78,10 @@ xmlns:core="sap.ui.core"
 									initials="{= ${name}.substring(0,1).toUpperCase() }"
 									class="sapUiTinyMarginEnd"/>
 									<VBox id="_IDGenVBox2">
-										<Title id="_IDGenTitle" text="{name}" level="H5"/>
-										<ObjectStatus id="_IDGenObjectStatus" text="{role}" state="Information"/>
+										<Title id="_IDGenTitle" text="{name}" level="H4"/>
+										<Text text="{role}" class="sapUiTinyMarginBottom" />
+										<ObjectStatus text="{status}" state="{path: 'status',formatter: '.formatter.getStatusState'}"
+    									icon="{path: 'status',formatter: '.formatter.getStatusIcon'}"/>
 									</VBox>
 								</HBox>
 								<HBox id="_IDGenHBox4">

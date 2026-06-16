@@ -1,14 +1,16 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../model/formatter",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MessageBox, MessageToast, Sorter, Filter, FilterOperator) {
+], function (Controller, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator) {
   "use strict";
   return Controller.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
+		formatter: formatter,
 		// on click add employee button
 		onAddEmployee: function () {
 			this.getOwnerComponent().getRouter().navTo("addEmployee");
@@ -44,6 +46,7 @@ sap.ui.define([
 							aEmployees.splice(iIndex, 1);
 							oModel.setProperty("/employees", aEmployees);
 							this.getOwnerComponent().updateRoles();
+							this.getOwnerComponent().updateDashboardCounts();
 							localStorage.setItem("employees",JSON.stringify(aEmployees));
 							oModel.setProperty("/employeeCount", aEmployees.length);
 							MessageToast.show("Employee deleted successfully");

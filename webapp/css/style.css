@@ -36,3 +36,33 @@
     transform: scale(1.08);
     transition: transform 0.2s ease;
 }
+.searchToolbar {
+    border-bottom: none !important;
+    background: none !important;
+}
+.dashboardTile {
+    width: 13rem !important;
+    height: 10rem !important;
+    /* border-radius: 12px; */
+}
+.dashboardTile:hover {
+    transform: translateY(-4px);
+    transition: 0.2s ease;
+}
+.kpiCard {
+    width: 13rem;
+    height: 9rem;
+    border-radius: 12px;
+    border: 1px solid #d9d9d9;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1rem;
+}
+.kpiCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.kpiCount {
+    font-size: 2rem;
+    font-weight: bold;
+}
