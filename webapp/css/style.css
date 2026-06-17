@@ -66,3 +66,7 @@
     font-size: 2rem;
     font-weight: bold;
 }
+.employeeCard {
+    border-radius: 12px;
+    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
+}

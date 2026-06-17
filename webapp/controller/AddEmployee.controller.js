@@ -1,8 +1,9 @@
 sap.ui.define([
   "sap/ui/core/mvc/Controller",
   "sap/ui/core/UIComponent",
-  "sap/m/MessageToast"
-], function (Controller, UIComponent, MessageToast) {
+  "sap/m/MessageToast",
+  "sap/m/MessageBox"
+], function (Controller, UIComponent, MessageToast, MessageBox) {
   "use strict";
   return Controller.extend("com.example.employeeapp.employeeapp.controller.AddEmployee", {
 
@@ -52,9 +53,37 @@ sap.ui.define([
     onNavBack: function () {
       this.getOwnerComponent().getRouter().navTo("employeeList");
     },
+
+    //form validation
+    _validateForm: function () {
+      var bValid = true;
+      var oNameInput = this.byId("nameInput");
+      var oRoleInput = this.byId("roleInput");
+      // Name validation
+      if (!oNameInput.getValue().trim()) {
+        oNameInput.setValueState("Error");
+        oNameInput.setValueStateText("Employee name is required");
+        bValid = false;
+      } else {
+        oNameInput.setValueState("None");
+      }
+      // Role validation
+      if (!oRoleInput.getValue().trim()) {
+        oRoleInput.setValueState("Error");
+        oRoleInput.setValueStateText("Role is required");
+        bValid = false;
+      } else {
+        oRoleInput.setValueState("None");
+      }
+      return bValid;
+    },
     
     // on click save/edit button
     onSaveEmployee: function () {
+      if (!this._validateForm()) {
+        MessageBox.error("Please fill all required fields.");
+        return;
+      }
       var oNameInput = this.byId("nameInput");
       var oRoleInput = this.byId("roleInput");
       var sStatus = this.byId("statusSelect").getSelectedKey();
@@ -67,6 +96,10 @@ sap.ui.define([
         oNameInput.setValueState("Error");
         oNameInput.setValueStateText("Employee name is required");
         bValid = false;
+      } else if (sName.length < 3) {
+        oNameInput.setValueState("Error");
+        NameInput.setValueStateText("Name must be at least 3 characters");
+        bValid = false;
       } else {
         oNameInput.setValueState("None");
       }
@@ -74,14 +107,27 @@ sap.ui.define([
         oRoleInput.setValueState("Error");
         oRoleInput.setValueStateText("Role is required");
         bValid = false;
+      } else if (sRole.length < 2) {
+        oRoleInput.setValueState("Error");
+        oRoleInput.setValueStateText("Role must be at least 2 characters");
+        bValid = false;
       } else {
         oRoleInput.setValueState("None");
       }
+      if (!sStatus) {
+        this.byId("statusSelect").setValueState("Error");
+        this.byId("statusSelect").setValueStateText("Please select a status");
+        bValid = false;
+        return;
+      } else {
+        this.byId("statusSelect").setValueState("None");
+      }
       if (!bValid) {
+        MessageBox.error("Please fill all required fields.");
         return;
       }
       var oModel = this.getView().getModel();
-      var aEmployees = oModel.getProperty("/employees");
+      var aEmployees = oModel.getProperty("/employees");  
       if (this._isEditMode) {
         var oEmployee = aEmployees.find(emp => emp.id == this._employeeId);
         if (oEmployee) {
@@ -90,8 +136,6 @@ sap.ui.define([
           oEmployee.status = sStatus;
         }
         oModel.setProperty("/employees", aEmployees);
-        this.getOwnerComponent().updateRoles();
-        this.getOwnerComponent().updateDashboardCounts();
         MessageToast.show("Employee Updated Successfully");
       } else {
         aEmployees.push({
@@ -108,6 +152,10 @@ sap.ui.define([
       localStorage.setItem("employees",JSON.stringify(aEmployees));
       oModel.setProperty("/employeeCount",aEmployees.length);
       this.getOwnerComponent().getRouter().navTo("employeeList");
+    },
+
+    onFieldChange: function (oEvent) {
+      oEvent.getSource().setValueState("None");
     },
 
     capitalizeWords: function (sText) {

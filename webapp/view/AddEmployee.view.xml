@@ -33,16 +33,19 @@ xmlns:form="sap.ui.layout.form"
 								id="nameInput"
 								placeholder="John Smith"
 								required="true"
-								valueLiveUpdate="true"/>
+								valueLiveUpdate="true"
+								liveChange="onFieldChange"/>
                 <Label id="_IDGenLabel1" text="Role"/>
                 <Input
 								id="roleInput"
 								placeholder="Frontend Developer"
 								required="true"
-								valueLiveUpdate="true"/>
+								valueLiveUpdate="true"
+								liveChange="onFieldChange"/>
 								<Label text="Status" required="true"/>
-								<Select id="statusSelect" selectedKey="Active">
+								<Select id="statusSelect" selectedKey="">
 									<items>
+										<core:Item key="" text="-- Select Status --"/>
 										<core:Item key="Active" text="Active"/>
 										<core:Item key="Inactive" text="Inactive"/>
 										<core:Item key="On Leave" text="On Leave"/>

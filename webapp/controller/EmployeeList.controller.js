@@ -5,7 +5,7 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/model/FilterOperator",
 ], function (Controller, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator) {
   "use strict";
   return Controller.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",

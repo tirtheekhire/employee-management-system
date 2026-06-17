@@ -1,5 +1,5 @@
 sap.ui.define([
-  "sap/ui/core/mvc/Controller"
+  "sap/ui/core/mvc/Controller",
 ], function (Controller) {
   "use strict";
   return Controller.extend("com.example.employeeapp.employeeapp.controller.EmployeeDetails",
@@ -37,6 +37,10 @@ sap.ui.define([
               .getModel()
               .getProperty("/selectedEmployee/id")
         });
-		}
+		},
+  
+    onClose: function () {
+      this.getOwnerComponent().getRouter().navTo("employeeList");
+    },
 	});
 });
