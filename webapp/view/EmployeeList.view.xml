@@ -69,13 +69,18 @@ xmlns:core="sap.ui.core"
 				</OverflowToolbar>
 				<!-- search , add employee and reset button toolbar -->
 				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
-					<SearchField id="_IDGenSearchField" width="55rem" placeholder="Search employee by name..." liveChange="onSearchEmployee"/>
+					<SearchField id="_IDGenSearchField" width="50rem" placeholder="Search employee by name..." liveChange="onSearchEmployee"/>
     			<ToolbarSpacer/>
 					<Button id="_IDGenButton"
 					text="Add Employee"
 					icon="sap-icon://add"
 					type="Emphasized"
 					press="onAddEmployee"/>
+					<Button
+					text="Export CSV"
+					icon="sap-icon://download"
+					press="onExportCSV"
+					class="sapUiTinyMarginEnd"/>
 					<Button id="_IDGenButton2"
 					text="Reset Data"
 					type="Reject"

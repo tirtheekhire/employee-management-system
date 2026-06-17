@@ -129,5 +129,26 @@ sap.ui.define([
     	var oModel = this.getView().getModel();
     	var oSelect = this.byId("roleFilter");
 		},
+
+		//export csv
+		onExportCSV: function () {
+    	const oModel = this.getView().getModel();
+    	const aEmployees = oModel.getProperty("/employees");
+    	let csvContent = "Name,Role,Status\n";
+    	aEmployees.forEach(function (emp) {
+        csvContent += `"${emp.name}","${emp.role}","${emp.status}"\n`;
+    	});
+    	const blob = new Blob([csvContent],{ type: "text/csv;charset=utf-8;" });
+    	const link = document.createElement("a");
+    	if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download","employees.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+				MessageToast.show("Employees exported successfully");
+    	}
+		},
   });
 });
