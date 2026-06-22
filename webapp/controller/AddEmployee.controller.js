@@ -1,11 +1,13 @@
 sap.ui.define([
-  "sap/ui/core/mvc/Controller",
+  "./BaseController",
   "sap/ui/core/UIComponent",
   "sap/m/MessageToast",
-  "sap/m/MessageBox"
-], function (Controller, UIComponent, MessageToast, MessageBox) {
+  "sap/m/MessageBox",
+  "../util/Validation",
+  "../service/EmployeeService"
+], function (BaseController, UIComponent, MessageToast, MessageBox, Validation, EmployeeService) {
   "use strict";
-  return Controller.extend("com.example.employeeapp.employeeapp.controller.AddEmployee", {
+  return BaseController.extend("com.example.employeeapp.employeeapp.controller.AddEmployee", {
 
     onInit: function () {
       var oRouter = this.getOwnerComponent().getRouter();
@@ -19,6 +21,7 @@ sap.ui.define([
       this.byId("roleInput").setValue("");
       this.byId("nameInput").setValueState("None");
       this.byId("roleInput").setValueState("None");
+      // this.byId("statusSelect").setSelectedKey(""); // Reset status
     },
 
     // for add functionality
@@ -29,9 +32,10 @@ sap.ui.define([
       this.byId("saveBtn").setText("Save Employee");
       this.byId("nameInput").setValue("");
       this.byId("roleInput").setValue("");
+      // Reset status dropdown
+      this.byId("statusSelect").setSelectedKey("");
       this.byId("nameInput").setValueState("None");
       this.byId("roleInput").setValueState("None");
-      this.byId("saveBtn").setText("Save Employee");
     },
 
     // for edit functionality
@@ -46,6 +50,7 @@ sap.ui.define([
       this.byId("saveBtn").setText("Update Employee");
       this.byId("nameInput").setValue(oEmployee.name);
       this.byId("roleInput").setValue(oEmployee.role);
+      this.byId("statusSelect").setSelectedKey(oEmployee.status || "");
       this.byId("saveBtn").setText("Update Employee");
     },
 
@@ -53,104 +58,31 @@ sap.ui.define([
     onNavBack: function () {
       this.getOwnerComponent().getRouter().navTo("employeeList");
     },
-
-    //form validation
-    _validateForm: function () {
-      var bValid = true;
-      var oNameInput = this.byId("nameInput");
-      var oRoleInput = this.byId("roleInput");
-      // Name validation
-      if (!oNameInput.getValue().trim()) {
-        oNameInput.setValueState("Error");
-        oNameInput.setValueStateText("Employee name is required");
-        bValid = false;
-      } else {
-        oNameInput.setValueState("None");
-      }
-      // Role validation
-      if (!oRoleInput.getValue().trim()) {
-        oRoleInput.setValueState("Error");
-        oRoleInput.setValueStateText("Role is required");
-        bValid = false;
-      } else {
-        oRoleInput.setValueState("None");
-      }
-      return bValid;
-    },
     
-    // on click save/edit button
+    // edit/update employee
     onSaveEmployee: function () {
-      if (!this._validateForm()) {
-        MessageBox.error("Please fill all required fields.");
-        return;
-      }
+      var oModel = this.getModel();
       var oNameInput = this.byId("nameInput");
+      var sName = this.capitalizeWords(oNameInput.getValue().trim());
       var oRoleInput = this.byId("roleInput");
-      var sStatus = this.byId("statusSelect").getSelectedKey();
-      var sName = oNameInput.getValue().trim();
-      sName = this.capitalizeWords(sName);
-      var sRole = oRoleInput.getValue().trim();
-      sRole = this.capitalizeWords(sRole);
-      var bValid = true;
-      if (!sName) {
-        oNameInput.setValueState("Error");
-        oNameInput.setValueStateText("Employee name is required");
-        bValid = false;
-      } else if (sName.length < 3) {
-        oNameInput.setValueState("Error");
-        NameInput.setValueStateText("Name must be at least 3 characters");
-        bValid = false;
-      } else {
-        oNameInput.setValueState("None");
-      }
-      if (!sRole) {
-        oRoleInput.setValueState("Error");
-        oRoleInput.setValueStateText("Role is required");
-        bValid = false;
-      } else if (sRole.length < 2) {
-        oRoleInput.setValueState("Error");
-        oRoleInput.setValueStateText("Role must be at least 2 characters");
-        bValid = false;
-      } else {
-        oRoleInput.setValueState("None");
-      }
-      if (!sStatus) {
-        this.byId("statusSelect").setValueState("Error");
-        this.byId("statusSelect").setValueStateText("Please select a status");
-        bValid = false;
-        return;
-      } else {
-        this.byId("statusSelect").setValueState("None");
-      }
-      if (!bValid) {
-        MessageBox.error("Please fill all required fields.");
+      var sRole = this.capitalizeWords(oRoleInput.getValue().trim());
+      var oEmployee = {
+        id: this._isEditMode ? this._employeeId : Date.now(),
+        name: sName,
+        role: sRole,
+        status: this.byId("statusSelect").getSelectedKey()
+      };
+      if (!Validation.validateEmployeeForm(this)) {
         return;
       }
-      var oModel = this.getView().getModel();
-      var aEmployees = oModel.getProperty("/employees");  
       if (this._isEditMode) {
-        var oEmployee = aEmployees.find(emp => emp.id == this._employeeId);
-        if (oEmployee) {
-          oEmployee.name = sName;
-          oEmployee.role = sRole;
-          oEmployee.status = sStatus;
-        }
-        oModel.setProperty("/employees", aEmployees);
-        MessageToast.show("Employee Updated Successfully");
+        EmployeeService.updateEmployee(oModel, oEmployee);
+        this.showToast("Employee updated successfully");
       } else {
-        aEmployees.push({
-            id: Date.now(),
-            name: sName,
-            role: sRole,
-            status: sStatus
-        });
-        MessageToast.show("Employee Added Successfully");
+        EmployeeService.addEmployee(oModel, oEmployee);
+        this.showToast("Employee added successfully");
       }
-      oModel.setProperty("/employees", aEmployees);
-      this.getOwnerComponent().updateRoles();
-      this.getOwnerComponent().updateDashboardCounts();
-      localStorage.setItem("employees",JSON.stringify(aEmployees));
-      oModel.setProperty("/employeeCount",aEmployees.length);
+      this.updateCounts();
       this.getOwnerComponent().getRouter().navTo("employeeList");
     },
 

@@ -1,14 +1,15 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"./BaseController",
 	"../model/formatter",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-], function (Controller, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator) {
+	"../service/EmployeeService"
+], function (BaseController, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator, EmployeeService) {
   "use strict";
-  return Controller.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
+  return BaseController.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
 		formatter: formatter,
 		// on click add employee button
@@ -23,37 +24,30 @@ sap.ui.define([
       var oBinding = oList.getBinding("items");
       if (!sValue) {
 				oBinding.filter([]);
-				 oList.setNoDataText("No employees found");
+				oList.setNoDataText("No employees found");
 				return;
-		}else  oList.setNoDataText("No matching employees found");
+			} else  oList.setNoDataText("No matching employees found");
       var aFilters = [new Filter("name",FilterOperator.Contains,sValue)];
       oBinding.filter(aFilters);
     },
 
 		// delete functionality
-    onDeleteEmployee: function (oEvent) {
-    	var oContext = oEvent.getSource().getBindingContext();
-    	var oEmployee = oContext.getObject();
-    	MessageBox.confirm("Delete employee '" + oEmployee.name + "' ?",
-      {
-        title: "Confirm Delete",
-        onClose: function (sAction) {
-          if (sAction === MessageBox.Action.OK) {
-            var oModel = this.getView().getModel();
-            var aEmployees = oModel.getProperty("/employees");
-						var iIndex = aEmployees.findIndex(emp => emp.id === oEmployee.id);
-            if (iIndex > -1) {
-							aEmployees.splice(iIndex, 1);
-							oModel.setProperty("/employees", aEmployees);
-							this.getOwnerComponent().updateRoles();
-							this.getOwnerComponent().updateDashboardCounts();
-							localStorage.setItem("employees",JSON.stringify(aEmployees));
-							oModel.setProperty("/employeeCount", aEmployees.length);
-							MessageToast.show("Employee deleted successfully");
-						}
-          }
-        }.bind(this)
-      });
+		onDeleteEmployee: function (oEvent) {
+    	var oEmployee = oEvent.getSource().getBindingContext().getObject();
+			var oModel = this.getView().getModel();
+    	MessageBox.confirm(
+        "Delete employee '" + oEmployee.name + "' ?",
+        {
+          title: "Confirm Delete",
+          onClose: function (sAction) {
+            if (sAction === MessageBox.Action.OK) {
+              EmployeeService.deleteEmployee(oModel, oEmployee.id);
+              this.updateCounts();
+              this.showToast("Employee deleted successfully");
+            }
+          }.bind(this)
+        }
+    	);
 		},
 
 		// edit functionality
@@ -73,15 +67,8 @@ sap.ui.define([
 
 		// click on employee card
 		onEmployeePress: function (oEvent) {
-    	var oEmployee =
-        oEvent.getSource()
-        .getBindingContext()
-        .getObject();
-      this.getOwnerComponent()
-        .getRouter()
-        .navTo("employeeDetails", {
-          employeeId: oEmployee.id
-        });
+    	var oEmployee = oEvent.getSource().getBindingContext().getObject();
+      this.getOwnerComponent().getRouter().navTo("employeeDetails", {employeeId: oEmployee.id});
 		},
 
 		// sorting method Ascending order
