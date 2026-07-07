@@ -1,72 +1,341 @@
-.employeeCard {
-    border-radius: 12px;
+/* Dashboard */
+
+.dashboardContainer{
+    padding:20px;
+    background:#f5f7fa;
 }
-.employeeCard .sapMPanelContent {
-    padding: 1.5rem;
+
+/* Header */
+
+.dashboardHeader{
+    background:linear-gradient(90deg,#0a6ed1,#3fa9f5);
+    color:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
-/* Enter your custom styles here */
-.employeeItem {
-    padding: 1rem;
-    border-radius: 0.75rem;
-    border-left: 4px solid #0a6ed1;
-    background: #ffffff;
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
-    transition: all 0.25s ease;
-    cursor: pointer;
+
+.dashboardHeader .sapMTitle{
+    color:white;
 }
-.employeeItem:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.375rem 1rem rgba(0,0,0,0.15);
-    background-color: #f8fbff;
+
+.dashboardHeader .sapMText{
+    color:#f0f5ff;
 }
-/* add employee button css */
-.sapMBtn:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
+
+/* KPI */
+
+.kpiCard{
+
+    width:220px;
+    height:150px;
+
+    margin:15px;
+
+    border-radius:18px;
+
+    color:white;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    transition:.3s;
 }
-/* edit and delete button css */
-.employeeActionBtn {
-    transition: all 0.2s ease;
+
+.kpiCard:hover{
+
+    transform:translateY(-6px);
+
 }
-.employeeActionBtn:hover {
-    transform: scale(1.1);
+
+.totalCard{
+
+    background:linear-gradient(135deg,#1976d2,#42a5f5);
+
 }
-/* employee image css */
-.sapFAvatar:hover {
-    transform: scale(1.08);
-    transition: transform 0.2s ease;
+.sapMObjectNumberText {
+    display: inline !important;
 }
-.searchToolbar {
-    border-bottom: none !important;
-    background: none !important;
+
+.activeCard{
+
+    background:linear-gradient(135deg,#2e7d32,#66bb6a);
+
 }
-.dashboardTile {
-    width: 13rem !important;
-    height: 10rem !important;
-    /* border-radius: 12px; */
+
+.inactiveCard{
+
+    background:linear-gradient(135deg,#c62828,#ef5350);
+
 }
-.dashboardTile:hover {
-    transform: translateY(-4px);
-    transition: 0.2s ease;
+
+.leaveCard{
+
+    background:linear-gradient(135deg,#ef6c00,#ffb74d);
+
 }
-.kpiCard {
-    width: 13rem;
-    height: 9rem;
-    border-radius: 12px;
-    border: 1px solid #d9d9d9;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 1rem;
+
+.kpiCard .sapMTitle{
+
+    color:white;
+
 }
-.kpiCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+
+.kpiCard .sapMObjectNumber{
+
+    color:white;
+
+    font-size:2rem;
+
 }
-.kpiCount {
+
+/* Statistics */
+
+.dashboardPanel{
+
+    margin-top:25px;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+/* Toolbar */
+
+.dashboardToolbar{
+
+    margin:25px 0;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    background:white;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+}
+
+/* Employee Card */
+
+.employeeCard{
+
+    padding:18px;
+
+    border-radius:15px;
+
+    background:white;
+
+    margin:10px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.employeeCard:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+}
+
+/* Avatar */
+
+.sapFAvatar{
+
+    /* background:#0a6ed1; */
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+/* Buttons */
+
+.sapMBtnEmphasized{
+
+    border-radius:10px;
+
+}
+
+.sapMBtnTransparent{
+
+    border-radius:8px;
+
+}
+.employeeToolbar{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:12px 20px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.08);
+
+}
+.searchField{
+
+    width:22rem;
+
+}
+
+.searchField .sapMSFF{
+
+    border-radius:30px;
+
+}
+.toolbarLabel{
+
+    margin-right:.5rem;
+
+    font-weight:600;
+
+    color:#4b5563;
+
+}
+
+.toolbarSelect{
+
+    margin-right:1rem;
+
+}
+.addButton{
+
+    margin-left:1rem;
+
+}
+
+.addButton .sapMBtnInner{
+
+    border-radius:999px;
+
+    padding-left:1.2rem;
+
+    padding-right:1.2rem;
+
+}
+.employeeToolbar .sapMBtnTransparent{
+
+    border-radius:50%;
+
+}
+/* ==========================================================
+   Employee Add Page
+========================================================== */
+
+.employeePage {
+    background: #f5f7fa;
+}
+
+/* Header */
+
+.employeeHeaderSection {
+    margin-bottom: 1.5rem;
+}
+
+.employeeHeader {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 700;
+    color: #1d2d44;
 }
+
+.employeeSubHeader {
+    color: #6a6d70;
+    margin-top: .4rem;
+    font-size: .95rem;
+}
+
+/* Card */
+
 .employeeCard {
-    border-radius: 12px;
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
+
+    border-radius: 16px !important;
+
+    border: none !important;
+
+    background: white !important;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+
+    padding: 1rem;
+
+}
+
+/* Form Labels */
+
+.employeeCard .sapMLabel {
+    font-weight: 600;
+    color: #34495e;
+}
+
+/* Inputs */
+
+.employeeCard .sapMInputBase,
+.employeeCard .sapMSlt {
+
+    border-radius: 8px;
+
+}
+
+/* Panel Header */
+
+.employeeCard .sapMPanelHdr {
+
+    font-size: 1.1rem;
+
+    font-weight: 600;
+
+}
+
+/* Message Strip */
+
+.employeeCard .sapMMsgStrip {
+
+    border-radius: 8px;
+
+}
+
+/* Footer */
+
+.sapMFooter-CTX {
+
+    background: white;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+/* Save Button */
+
+#saveBtn {
+
+    min-width: 160px;
+
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .employeeCard,
+    .employeeHeaderSection {
+
+        width: 95% !important;
+
+    }
+
 }

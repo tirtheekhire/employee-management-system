@@ -1,133 +1,264 @@
-<mvc:View controllerName="com.example.employeeapp.employeeapp.controller.EmployeeList"
-xmlns:mvc="sap.ui.core.mvc"
-xmlns="sap.m"
-xmlns:core="sap.ui.core"
->
-	<Page id="_IDGenPage" title="Home">
-		<content>
-			<VBox id="_IDGenVBox" class="sapUiSmallMargin">
-			<!-- KPI card layout -->
-				<HBox justifyContent="SpaceAround" wrap="Wrap" class="sapUiMediumMarginBottom">
-					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
-    				<core:Icon src="sap-icon://group" size="2rem"/>
-    				<Title text="Total Employees" level="H5" class="sapUiTinyMarginTop"/>
-    				<Text text="{/employeeCount}" class="kpiCount"/>
-					</VBox>
-					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
-	    			<core:Icon src="sap-icon://accept" size="2rem"/>
-    				<Title text="Active" level="H5" class="sapUiTinyMarginTop"/>
-    				<Text text="{/activeCount}" class="kpiCount"/>
-					</VBox>
-					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
-    				<core:Icon src="sap-icon://decline" size="2rem"/>
-    				<Title text="Inactive" level="H5" class="sapUiTinyMarginTop"/>
-    				<Text text="{/inactiveCount}" class="kpiCount"/>
-					</VBox>
-					<VBox class="kpiCard" alignItems="Center" justifyContent="Center">
-    				<core:Icon src="sap-icon://lateness" size="2rem"/>
-    				<Title text="On Leave" level="H5" class="sapUiTinyMarginTop"/>
-    				<Text text="{/leaveCount}" class="kpiCount"/>
-					</VBox>
-				</HBox>
-				<!-- Employee statistics section -->
-				<Panel headerText="Employee Status Distribution" class="sapUiMediumMarginBottom">
-    			<VBox class="sapUiMediumMargin">
-        		<Label text="Active"/>
-        		<ProgressIndicator
-            percentValue="{/activePercentage}"
-            displayValue="{= ${/activeCount} + ' Employees (' + ${/activePercentage} + '%)'}"
-            state="Success"/>
-        		<Label text="Inactive" class="sapUiSmallMarginTop"/>
-        		<ProgressIndicator
-            percentValue="{/inactivePercentage}"
-            displayValue="{= ${/inactiveCount} + ' Employees (' + ${/inactivePercentage} + '%)'}"
-            state="Error"/>
-        		<Label text="On Leave" class="sapUiSmallMarginTop"/>
-        		<ProgressIndicator
-            percentValue="{/leavePercentage}"
-            displayValue="{= ${/leaveCount} + ' Employees (' + ${/leavePercentage} + '%)'}"
-            state="Warning"/>
-    			</VBox>
-				</Panel>
-				<!-- Employee list title role filter and sorting toolbar -->
-				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
-					<Title text="{= 'Employee List (' + ${/employeeCount} + ')' }" level="H3"/>
-					<ToolbarSpacer/>
-					<Label text="Role"/>
-					<Select id="roleFilter" width="180px" change="onRoleFilter" items="{/roles}">
-						<items><core:Item key="{key}" text="{text}"/></items>
-					</Select>
-					<Button id="_IDGenButton6"
-					icon="sap-icon://sort-ascending"
-					tooltip="Sort A-Z"
-					press="onSortAscending"
-					class="sapUiTinyMarginEnd"/>
-					<Button id="_IDGenButton7"
-					tooltip="Sort Z-A"
-					icon="sap-icon://sort-descending"
-					press="onSortDescending"/>
-				</OverflowToolbar>
-				<!-- search , add employee and reset button toolbar -->
-				<OverflowToolbar class="sapUiSmallMarginBottom searchToolbar">
-					<SearchField id="_IDGenSearchField" width="50rem" placeholder="Search employee by name..." liveChange="onSearchEmployee"/>
-    			<ToolbarSpacer/>
-					<Button id="_IDGenButton"
-					text="Add Employee"
-					icon="sap-icon://add"
-					type="Emphasized"
-					press="onAddEmployee"/>
-					<Button
-					text="Export CSV"
-					icon="sap-icon://download"
-					press="onExportCSV"
-					class="sapUiTinyMarginEnd"/>
-					<Button id="_IDGenButton2"
+<mvc:View
+    controllerName="com.example.employeeapp.employeeapp.controller.EmployeeList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+<Page
+    title="Employee Management Dashboard">
+
+    <content>
+
+        <VBox class="dashboardContainer">
+
+            <!-- Dashboard Header -->
+
+            <HBox class="dashboardHeader"
+                justifyContent="SpaceBetween"
+                alignItems="Center">
+
+                <VBox>
+
+                    <Title
+                        text="Employee Dashboard"
+                        level="H2"/>
+
+                    <Text
+                        text="Manage employees efficiently"/>
+
+                </VBox>
+
+                <Button
+                    text="Add Employee"
+                    icon="sap-icon://add"
+                    type="Emphasized"
+                    press="onAddEmployee"/>
+
+            </HBox>
+
+            <!-- KPI Cards -->
+
+            <HBox
+                wrap="Wrap"
+                justifyContent="SpaceAround"
+                class="sapUiMediumMarginTop">
+
+                <VBox class="kpiCard totalCard">
+
+                    <core:Icon
+                        src="sap-icon://group"
+                        size="2rem"/>
+
+                    <Title
+                        text="Total Employees"
+                        level="H5"/>
+
+                    <ObjectNumber
+                        number="{/employeeCount}"/>
+
+                </VBox>
+
+                <VBox class="kpiCard activeCard">
+
+                    <core:Icon
+                        src="sap-icon://accept"
+                        size="2rem"/>
+
+                    <Title
+                        text="Active"
+                        level="H5"/>
+
+                    <ObjectNumber
+                        number="{/activeCount}"/>
+
+                </VBox>
+
+                <VBox class="kpiCard inactiveCard">
+
+                    <core:Icon
+                        src="sap-icon://decline"
+                        size="2rem"/>
+
+                    <Title
+                        text="Inactive"
+                        level="H5"/>
+
+                    <ObjectNumber
+                        number="{/inactiveCount}"/>
+
+                </VBox>
+
+                <VBox class="kpiCard leaveCard">
+
+                    <core:Icon
+                        src="sap-icon://lateness"
+                        size="2rem"/>
+
+                    <Title
+                        text="On Leave"
+                        level="H5"/>
+
+                    <ObjectNumber
+                        number="{/leaveCount}"/>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- Statistics -->
+
+            <Panel
+                headerText="Employee Statistics"
+                class="dashboardPanel">
+
+                <VBox class="sapUiMediumMargin">
+
+                    <Label text="Active"/>
+
+                    <ProgressIndicator
+                        percentValue="{/activePercentage}"
+                        displayValue="{= ${/activePercentage} + '%'}"
+                        state="Success"/>
+
+                    <Label
+                        text="Inactive"
+                        class="sapUiSmallMarginTop"/>
+
+                    <ProgressIndicator
+                        percentValue="{/inactivePercentage}"
+                        displayValue="{= ${/inactivePercentage} + '%'}"
+                        state="Error"/>
+
+                    <Label
+                        text="On Leave"
+                        class="sapUiSmallMarginTop"/>
+
+                    <ProgressIndicator
+                        percentValue="{/leavePercentage}"
+                        displayValue="{= ${/leavePercentage} + '%'}"
+                        state="Warning"/>
+
+                </VBox>
+
+            </Panel>
+
+            <!-- Toolbar -->
+
+            <OverflowToolbar class="dashboardToolbar">
+
+                <SearchField
+                    width="25rem"
+                    placeholder="Search Employee"
+                    liveChange="onSearchEmployee"/>
+
+                <ToolbarSpacer/>
+
+                <Label text="Role"/>
+
+                <Select
+                    id="roleFilter"
+                    width="170px"
+                    change="onRoleFilter"
+                    items="{/roles}">
+
+                    <items>
+                        <core:Item
+                            key="{key}"
+                            text="{text}"/>
+                    </items>
+
+                </Select>
+
+                <Button
+                    icon="sap-icon://sort-ascending"
+                    press="onSortAscending"/>
+
+                <Button
+                    icon="sap-icon://sort-descending"
+                    press="onSortDescending"/>
+
+                <Button
+                    text="Export"
+                    icon="sap-icon://download"
+                    press="onExportCSV"/>
+				<Button id="_IDGenButton2"
 					text="Reset Data"
 					type="Reject"
 					icon="sap-icon://delete"
 					press="onResetData"/>
-				</OverflowToolbar>
-				<!-- Employee List -->
-				<List id="employeeList" items="{/employees}" class="sapUiMediumMarginTop" growing="true"
-				growingScrollToLoad="true"  noDataText="No employees found. Click 'Add Employee' to create one.">
-					<items>
-						<CustomListItem id="_IDGenCustomListItem" type="Active" press="onEmployeePress">
-							<HBox id="_IDGenHBox"
-							width="100%"
-							justifyContent="SpaceBetween"
-							alignItems="Center"
-							class="employeeItem">
-								<HBox id="_IDGenHBox3" alignItems="Center">
-									<Avatar id="_IDGenAvatar"
-									displayShape="Circle"
-									initials="{= ${name}.substring(0,1).toUpperCase() }"
-									class="sapUiTinyMarginEnd"/>
-									<VBox id="_IDGenVBox2">
-										<Title id="_IDGenTitle" text="{name}" level="H4"/>
-										<Text text="{role}" class="sapUiTinyMarginBottom" />
-										<ObjectStatus text="{status}" state="{path: 'status',formatter: '.formatter.getStatusState'}"
-    									icon="{path: 'status',formatter: '.formatter.getStatusIcon'}"/>
-									</VBox>
-								</HBox>
-								<HBox id="_IDGenHBox4">
-									<Button id="_IDGenButton3"
-									icon="sap-icon://edit"
-									type="Transparent"
-									tooltip="Edit"
-									press="onEditEmployee"
-									class="employeeActionBtn"/>
-									<Button id="_IDGenButton4"
-									icon="sap-icon://delete"
-									type="Transparent"
-									tooltip="Delete"
-									press="onDeleteEmployee"
-									class="employeeActionBtn"/>
-								</HBox>
-							</HBox>
-        				</CustomListItem>
-					</items>
-				</List>
-			</VBox>
-		</content>
-	</Page>
+
+            </OverflowToolbar>
+
+            <!-- Employee List -->
+
+            <List
+                id="employeeList"
+                items="{/employees}"
+                growing="true"
+                growingScrollToLoad="true"
+                noDataText="No Employees Found">
+
+                <items>
+
+                    <CustomListItem
+                        type="Active"
+                        press="onEmployeePress">
+
+                        <HBox
+                            class="employeeCard"
+                            justifyContent="SpaceBetween"
+                            alignItems="Center">
+
+                            <HBox
+                                alignItems="Center">
+
+                                <Avatar
+                                    displayShape="Circle"
+                                    initials="{= ${name}.substring(0,1)}"
+                                    class="sapUiMediumMarginEnd"/>
+
+                                <VBox>
+
+                                    <Title
+                                        text="{name}"
+                                        level="H4"/>
+
+                                    <Text text="{role}"/>
+
+                                    <ObjectStatus
+                                        text="{status}"
+                                        state="{path:'status',formatter:'.formatter.getStatusState'}"/>
+
+                                </VBox>
+
+                            </HBox>
+
+                            <HBox>
+
+                                <Button
+                                    icon="sap-icon://edit"
+                                    type="Transparent"
+                                    press="onEditEmployee"/>
+
+                                <Button
+                                    icon="sap-icon://delete"
+                                    type="Transparent"
+                                    press="onDeleteEmployee"/>
+
+                            </HBox>
+
+                        </HBox>
+
+                    </CustomListItem>
+
+                </items>
+
+            </List>
+
+        </VBox>
+
+    </content>
+
+</Page>
+
 </mvc:View>

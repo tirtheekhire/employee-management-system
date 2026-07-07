@@ -15,11 +15,9 @@ sap.ui.define([], function () {
 		},
     updateEmployee: function (oModel, oUpdatedEmployee) {
 			const aEmployees = this.getEmployees(oModel);
-			const iIndex = aEmployees.findIndex(emp => emp.id === oUpdatedEmployee.id);
+			const iIndex = aEmployees.findIndex(emp => String(emp.id) === String(oUpdatedEmployee.id));
       if (iIndex > -1) {
         aEmployees[iIndex] = oUpdatedEmployee;
-				oModel.setProperty("/employees", aEmployees);
-				localStorage.setItem("employees", JSON.stringify(aEmployees));
         this._saveEmployees(oModel, aEmployees);
       }
     },

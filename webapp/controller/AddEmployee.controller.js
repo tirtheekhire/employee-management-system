@@ -29,13 +29,15 @@ sap.ui.define([
       this._isEditMode = false;
       this._employeeId = null;
       this.byId("employeePage").setTitle("Add Employee");
+      this.byId("headingText").setText("Add New Employee");
+      this.byId("headingSubText").setText("Create a new employee profile for your organization.")
       this.byId("saveBtn").setText("Save Employee");
       this.byId("nameInput").setValue("");
       this.byId("roleInput").setValue("");
       // Reset status dropdown
       this.byId("statusSelect").setSelectedKey("");
       this.byId("nameInput").setValueState("None");
-      this.byId("roleInput").setValueState("None");
+      this.byId("roleInput").setValueState();
     },
 
     // for edit functionality
@@ -45,13 +47,15 @@ sap.ui.define([
       var oModel = this.getView().getModel();
       var aEmployees = oModel.getProperty("/employees");
       var oEmployee = aEmployees.find(emp => emp.id == sId);
-      this._employeeId = sId;
+      this._employeeId = Number(sId);
       this.byId("employeePage").setTitle("Edit Employee");
       this.byId("saveBtn").setText("Update Employee");
       this.byId("nameInput").setValue(oEmployee.name);
       this.byId("roleInput").setValue(oEmployee.role);
       this.byId("statusSelect").setSelectedKey(oEmployee.status || "");
       this.byId("saveBtn").setText("Update Employee");
+      this.byId("headingText").setText("Update Employee");
+      this.byId("headingSubText").setText(" ");
     },
 
     // back button
