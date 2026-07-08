@@ -88,11 +88,6 @@
           "pattern": "edit/{employeeId}",
           "name": "editEmployee",
           "target": "addEmployee"
-        },
-        {
-          "pattern": "details/{employeeId}",
-          "name": "employeeDetails",
-          "target": "employeeDetails"
         }
       ],
       "targets": {

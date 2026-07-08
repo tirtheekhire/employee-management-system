@@ -68,7 +68,21 @@ sap.ui.define([
 		// click on employee card
 		onEmployeePress: function (oEvent) {
     	var oEmployee = oEvent.getSource().getBindingContext().getObject();
-      this.getOwnerComponent().getRouter().navTo("employeeDetails", {employeeId: oEmployee.id});
+			var oDialogModel = new sap.ui.model.json.JSONModel(oEmployee);
+    	this.getView().setModel(oDialogModel, "dialog");
+			this.byId("employeeDialog").open();
+		},
+
+		// close dialog
+		onCloseEmployeeDialog: function () {
+    	this.byId("employeeDialog").close();
+		},
+
+		// edit from dialog
+		onDialogEdit: function () {
+    	var oEmployee = this.getView().getModel("dialog").getData();
+    	this.byId("employeeDialog").close();
+    	this.getOwnerComponent().getRouter().navTo("editEmployee", {employeeId: oEmployee.id});
 		},
 
 		// sorting method Ascending order

@@ -1,173 +1,98 @@
 <mvc:View
-    controllerName="com.example.employeeapp.employeeapp.controller.AddEmployee"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:form="sap.ui.layout.form">
-
-    <App>
-        <Page
-            id="employeePage"
-            title="Add New Employee"
-            showNavButton="true"
-            navButtonPress="onNavBack"
-            class="employeePage">
-
+controllerName="com.example.employeeapp.employeeapp.controller.AddEmployee"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:form="sap.ui.layout.form">
+  <App>
+    <Page
+		id="employeePage"
+		title="Add New Employee"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="employeePage">
+    	<content>
+        <VBox
+				width="100%"
+				alignItems="Center"
+				class="sapUiLargeMarginTop">
+					<!-- Header -->
+					<VBox width="700px" class="employeeHeaderSection">
+						<Title id="headingText" text="Add New Employee" class="employeeHeader"/>
+						<Text class="employeeSubHeader" id="headingSubText"/>
+					</VBox>
+          <!-- Form Card -->
+          <Panel
+					width="700px"
+					class="employeeCard"
+					expandable="false">
+            <headerToolbar>
+              <OverflowToolbar>
+                <Title text="Employee Information"/>
+              </OverflowToolbar>
+            </headerToolbar>
             <content>
-
-                <VBox
-                    width="100%"
-                    alignItems="Center"
-                    class="sapUiLargeMarginTop">
-
-                    <!-- Header -->
-
-                    <VBox
-                        width="700px"
-                        class="employeeHeaderSection">
-
-                        <Title
-							id="headingText"
-                            text="Add New Employee"
-                            class="employeeHeader"/>
-
-                        <Text
-                            
-                            class="employeeSubHeader"
-							id="headingSubText"/>
-
-                    </VBox>
-
-                    <!-- Form Card -->
-
-                    <Panel
-                        width="700px"
-                        class="employeeCard"
-                        expandable="false">
-
-                        <headerToolbar>
-
-                            <OverflowToolbar>
-
-                                <Title
-                                    text="Employee Information"/>
-
-                            </OverflowToolbar>
-
-                        </headerToolbar>
-
-                        <content>
-
-                            <MessageStrip
-                                text="Please complete all mandatory fields before saving."
-                                type="Information"
-                                showIcon="true"
-                                class="sapUiSmallMarginBottom"/>
-
-                            <form:SimpleForm
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                labelSpanXL="3"
-                                labelSpanL="3"
-                                labelSpanM="3"
-                                labelSpanS="12"
-                                columnsXL="1"
-                                columnsL="1"
-                                columnsM="1">
-
-                                <!-- Name -->
-
-                                <Label
-                                    text="Employee Name"
-                                    icon="sap-icon://employee"/>
-
-                                <Input
-                                    id="nameInput"
-                                    placeholder="John Smith"
-                                    required="true"
-                                    valueLiveUpdate="true"
-                                    liveChange="onFieldChange"/>
-
-                                <!-- Role -->
-
-                                <Label
-                                    text="Role"
-                                    icon="sap-icon://business-suite"/>
-
-                                <Input
-                                    id="roleInput"
-                                    placeholder="Frontend Developer"
-                                    required="true"
-                                    valueLiveUpdate="true"
-                                    liveChange="onFieldChange"/>
-
-                                <!-- Status -->
-
-                                <Label
-                                    text="Employment Status"
-                                    icon="sap-icon://status-positive"
-                                    required="true"/>
-
-                                <Select
-                                    id="statusSelect"
-                                    selectedKey="">
-
-                                    <items>
-
-                                        <core:Item
-                                            key=""
-                                            text="Select Status"/>
-
-                                        <core:Item
-                                            key="Active"
-                                            text="Active"/>
-
-                                        <core:Item
-                                            key="Inactive"
-                                            text="Inactive"/>
-
-                                        <core:Item
-                                            key="On Leave"
-                                            text="On Leave"/>
-
-                                    </items>
-
-                                </Select>
-
-                            </form:SimpleForm>
-
-                        </content>
-
-                    </Panel>
-
-                </VBox>
-
+              <MessageStrip
+							text="Please complete all mandatory fields before saving."
+							type="Information"
+							showIcon="true"
+							class="sapUiSmallMarginBottom"/>
+              <form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								labelSpanXL="3"
+								labelSpanL="3"
+								labelSpanM="3"
+								labelSpanS="12"
+								columnsXL="1"
+								columnsL="1"
+								columnsM="1">
+              	<!-- Name -->
+                <Label text="Employee Name" icon="sap-icon://employee"/>
+                <Input
+								id="nameInput"
+								placeholder="John Smith"
+								required="true"
+								valueLiveUpdate="true"
+								liveChange="onFieldChange"/>
+                <!-- Role -->
+                <Label text="Role" icon="sap-icon://business-suite"/>
+                <Input
+								id="roleInput"
+								placeholder="Frontend Developer"
+								required="true"
+								valueLiveUpdate="true"
+								liveChange="onFieldChange"/>
+              	<!-- Status -->
+                <Label text="Employment Status" icon="sap-icon://status-positive" required="true"/>
+                <Select id="statusSelect" selectedKey="">
+                  <items>
+                  	<core:Item key="" text="Select Status"/>
+                    <core:Item key="Active" text="Active"/>
+                    <core:Item key="Inactive" text="Inactive"/>
+                    <core:Item key="On Leave" text="On Leave"/>
+                  </items>
+                </Select>
+              </form:SimpleForm>
             </content>
-
-            <footer>
-
-                <OverflowToolbar>
-
-                    <ToolbarSpacer/>
-
-                    <Button
-                        text="Cancel"
-                        type="Transparent"
-                        press="onNavBack"/>
-
-                    <Button
-                        id="saveBtn"
-                        text="Save Employee"
-                        icon="sap-icon://save"
-                        type="Emphasized"
-                        press="onSaveEmployee"/>
-
-                </OverflowToolbar>
-
-            </footer>
-
-        </Page>
-
-    </App>
-
+          </Panel>
+        </VBox>
+    	</content>
+      <footer>
+      	<OverflowToolbar>
+          <ToolbarSpacer/>
+					<Button
+					text="Cancel"
+					type="Transparent"
+					press="onNavBack"/>
+          <Button
+					id="saveBtn"
+					text="Save Employee"
+					icon="sap-icon://save"
+					type="Emphasized"
+					press="onSaveEmployee"/>
+        </OverflowToolbar>
+      </footer>
+    </Page>
+  </App>
 </mvc:View>
