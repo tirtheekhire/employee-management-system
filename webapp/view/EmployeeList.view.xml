@@ -72,14 +72,14 @@ xmlns:form="sap.ui.layout.form">
 					placeholder="Search Employee"
 					liveChange="onSearchEmployee"/>
           <ToolbarSpacer/>
-          <Label text="Role"/>
+          <!-- <Label text="Role"/>
           <Select
 					id="roleFilter"
 					width="170px"
 					change="onRoleFilter"
-					items="{/roles}">
+					items="{/Role}">
             <items><core:Item key="{key}" text="{text}"/></items>
-        	</Select>
+        	</Select> -->
           <Button icon="sap-icon://sort-ascending" press="onSortAscending"/>
           <Button icon="sap-icon://sort-descending" press="onSortDescending"/>
           <Button text="Export" icon="sap-icon://download" press="onExportCSV"/>
@@ -105,13 +105,13 @@ xmlns:form="sap.ui.layout.form">
                 <HBox alignItems="Center">
                   <Avatar
 									displayShape="Circle"
-									initials="{= ${name}.substring(0,1)}"
+									initials="{= ${Name}.substring(0,1)}"
 									class="sapUiMediumMarginEnd"/>
                   <VBox>
-                    <Title text="{name}" level="H4"/>
-                    <Text text="{role}"/>
+                    <Title text="{Name}" level="H4"/>
+                    <Text text="{Role}"/>
                     <ObjectStatus
-                    text="{status}"
+                    text="{Status}"
                   	state="{path:'status',formatter:'.formatter.getStatusState'}"/>
                   </VBox>
                 </HBox>

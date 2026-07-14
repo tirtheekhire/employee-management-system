@@ -17,8 +17,8 @@ sap.ui.define([
 			var aEmployees = JSON.parse(localStorage.getItem("employees")) || [];
 			var aRoles = ["ALL"];
 			aEmployees.forEach(function (employee) {
-    			if (!aRoles.includes(employee.role)) {
-        		aRoles.push(employee.role);
+    			if (!aRoles.includes(employee.Role)) {
+        		aRoles.push(employee.Role);
     			}
 			});
 			var oModel = new sap.ui.model.json.JSONModel({
@@ -50,12 +50,12 @@ sap.ui.define([
         });
         if (!bExists) {
           aRoles.push({
-            key: employee.role,
-            text: employee.role
+            key: employee.Role,
+            text: employee.Role
           });
         }
     	});
-	    oModel.setProperty("/roles", aRoles);
+	    oModel.setProperty("/Role", aRoles);
     	oModel.refresh(true);
 		},
 
@@ -63,9 +63,9 @@ sap.ui.define([
 		updateDashboardCounts: function () {
     	var oModel = this.getModel();
     	var aEmployees = oModel.getProperty("/employees");
-    	var iActive = aEmployees.filter(e => e.status === "Active").length;
-    	var iLeave = aEmployees.filter(e => e.status === "On Leave").length;
-    	var iInactive = aEmployees.filter(e => e.status === "Inactive").length;
+    	var iActive = aEmployees.filter(e => e.Status === "Active").length;
+    	var iLeave = aEmployees.filter(e => e.Status === "On Leave").length;
+    	var iInactive = aEmployees.filter(e => e.Status === "Inactive").length;
     	oModel.setProperty("/employeeCount",aEmployees.length);
     	oModel.setProperty("/activeCount",iActive);
     	oModel.setProperty("/leaveCount",iLeave);

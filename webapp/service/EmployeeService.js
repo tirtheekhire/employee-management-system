@@ -23,7 +23,7 @@ sap.ui.define([], function () {
     },
     deleteEmployee: function (oModel, sEmployeeId) {
       const aEmployees = this.getEmployees(oModel);
-      const aFilteredEmployees = aEmployees.filter(emp => emp.id !== sEmployeeId);
+      const aFilteredEmployees = aEmployees.filter(emp => emp.EmployeeId !== sEmployeeId);
       this._saveEmployees(oModel, aFilteredEmployees);
     }
   };

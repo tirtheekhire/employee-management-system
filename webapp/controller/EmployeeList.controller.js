@@ -12,6 +12,7 @@ sap.ui.define([
   return BaseController.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
 		formatter: formatter,
+
 		// on click add employee button
 		onAddEmployee: function () {
 			this.getOwnerComponent().getRouter().navTo("addEmployee");
@@ -27,7 +28,7 @@ sap.ui.define([
 				oList.setNoDataText("No employees found");
 				return;
 			} else  oList.setNoDataText("No matching employees found");
-      var aFilters = [new Filter("name",FilterOperator.Contains,sValue)];
+      var aFilters = [new Filter("Name",FilterOperator.Contains,sValue)];
       oBinding.filter(aFilters);
     },
 
@@ -36,12 +37,12 @@ sap.ui.define([
     	var oEmployee = oEvent.getSource().getBindingContext().getObject();
 			var oModel = this.getView().getModel();
     	MessageBox.confirm(
-        "Delete employee '" + oEmployee.name + "' ?",
+        "Delete employee '" + oEmployee.Name + "' ?",
         {
           title: "Confirm Delete",
           onClose: function (sAction) {
             if (sAction === MessageBox.Action.OK) {
-              EmployeeService.deleteEmployee(oModel, oEmployee.id);
+              EmployeeService.deleteEmployee(oModel, oEmployee.EmployeeId);
               this.updateCounts();
               this.showToast("Employee deleted successfully");
             }
@@ -53,7 +54,7 @@ sap.ui.define([
 		// edit functionality
     onEditEmployee: function (oEvent) {
     	var oEmployee = oEvent.getSource().getBindingContext().getObject();
-    	this.getOwnerComponent().getRouter().navTo("editEmployee", {employeeId: oEmployee.id});
+    	this.getOwnerComponent().getRouter().navTo("editEmployee", {employeeId: oEmployee.EmployeeId});
 		},
 
 		// reset data
@@ -90,7 +91,7 @@ sap.ui.define([
     	var oList = this.byId("employeeList");
     	var oBinding = oList.getBinding("items");
     	var oSorter = new Sorter(
-        "name",
+        "Name",
         false
     	);
     	oBinding.sort(oSorter);
@@ -102,7 +103,7 @@ sap.ui.define([
     	var oList = this.byId("employeeList");
     	var oBinding = oList.getBinding("items");
     	var oSorter = new Sorter(
-        "name",
+        "Name",
         true
     	);
     	oBinding.sort(oSorter);
@@ -135,9 +136,9 @@ sap.ui.define([
 		onExportCSV: function () {
     	const oModel = this.getView().getModel();
     	const aEmployees = oModel.getProperty("/employees");
-    	let csvContent = "Name,Role,Status\n";
+    	let csvContent = "EmployeeId,Name,Email,Mobile,Gender,DOB,Department,Role,EmploymentType,Status,DOJ,Manager,Address1,Address2,City,State,Country,Pincode,Experience,Salary,Education,Skills,EmergencyContact,EmergencyPhone,BloodGroup,Notes\n";
     	aEmployees.forEach(function (emp) {
-        csvContent += `"${emp.name}","${emp.role}","${emp.status}"\n`;
+        csvContent += `"${emp.EmployeeId}","${emp.Name}","${emp.Email}","${emp.Mobile}","${emp.Gender}","${emp.DateOfBirth}","${emp.Department}","${emp.Role}","${emp.EmploymentType}","${emp.Status}","${emp.JoiningDate}","${emp.Manager}","${emp.Address1}","${emp.Address2}","${emp.City}","${emp.State}","${emp.Country}","${emp.Pincode}","${emp.Experience}","${emp.Salary}","${emp.Education}","${emp.Skills}","${emp.EmergencyContact}","${emp.EmergencyPhone}","${emp.BloodGroup}","${emp.Notes}"\n`;
     	});
     	const blob = new Blob([csvContent],{ type: "text/csv;charset=utf-8;" });
     	const link = document.createElement("a");

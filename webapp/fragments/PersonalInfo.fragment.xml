@@ -1,0 +1,145 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <Panel
+        headerText="Personal Information"
+        class="employeePanel">
+
+        <content>
+
+            <l:Grid
+                defaultSpan="XL6 L6 M12 S12"
+                hSpacing="1"
+                vSpacing=""
+                width="100%">
+
+                <!-- Avatar -->
+
+                <VBox
+                    alignItems="Center"
+                    justifyContent="Center"
+                    class="sapUiMediumMarginTop">
+
+                    <Avatar
+                        id="employeeAvatar"
+                        displayShape="Circle"
+                        displaySize="XL"
+                        initials="DU"
+                        press="onUploadPhoto"
+                        class="employeeAvatar"/>
+                    <Button
+                        text="Upload Photo"
+                        icon="sap-icon://camera"
+                        type="Transparent"
+                    />
+
+                </VBox>
+
+                <!-- Form -->
+
+                <VBox width="100%">
+
+                    <l:Grid
+                        defaultSpan="XL6 L6 M6 S12"
+                        hSpacing="1"
+                        vSpacing="1">
+
+                        <!-- Employee ID -->
+
+                        <VBox>
+
+                            <Label text="Employee ID"/>
+
+                            <Input
+                                id = "employeeIdInput"
+                                value=""
+                                editable="false"/>
+
+                        </VBox>
+
+                        <!-- Name -->
+
+                        <VBox>
+
+                            <Label text="Full Name *"/>
+
+                            <Input
+                                id="nameInput"
+                                value="{employeeModel>/Name}"
+                                placeholder="Enter full name"
+                                liveChange="onInputValidation"/>
+
+                        </VBox>
+
+                        <!-- Email -->
+
+                        <VBox>
+
+                            <Label text="Email"/>
+
+                            <Input
+                                id="emailInput"
+                                value="{employeeModel>/Email}"
+                                type="Email"
+                                placeholder="john@company.com"
+                                liveChange="onInputValidation"/>
+
+                        </VBox>
+
+                        <!-- Mobile -->
+
+                        <VBox>
+
+                            <Label text="Mobile"/>
+
+                            <Input
+                                id="mobileInput"
+                                value="{employeeModel>/Mobile}"
+                                type="Tel"
+                                placeholder="+91 XXXXX XXXXX"
+                                liveChange="onInputValidation"/>
+
+                        </VBox>
+
+                        <!-- Gender -->
+
+                        <VBox>
+
+                            <Label text="Gender"/>
+
+                            <Select selectedKey="{employeeModel>/Gender}" id="genderSelect" change="onSelectValidation" width="100%">
+                                <core:Item key="" text="Select Gender"/>
+                                <core:Item key="Male" text="Male"/>
+                                <core:Item key="Female" text="Female"/>
+                                <core:Item key="Other" text="Other"/>
+
+                            </Select>
+
+                        </VBox>
+
+                        <!-- DOB -->
+
+                        <VBox>
+
+                            <Label text="Date of Birth"/>
+
+                            <DatePicker
+                                id="dobPicker"
+                                value="{employeeModel>/DateOfBirth}"
+                                displayFormat="dd/MM/yyyy"/>
+
+                        </VBox>
+
+                    </l:Grid>
+
+                </VBox>
+
+            </l:Grid>
+
+        </content>
+
+    </Panel>
+
+</core:FragmentDefinition>

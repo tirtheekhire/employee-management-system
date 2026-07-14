@@ -1,0 +1,144 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <Panel
+        headerText="Professional Information"
+        class="employeePanel">
+
+        <content>
+
+            <l:Grid
+                defaultSpan="XL6 L6 M6 S12"
+                hSpacing="1"
+                vSpacing="1">
+
+                <!-- Experience -->
+
+                <VBox>
+
+                    <Label text="Experience"/>
+
+                    <Input
+                        id="experienceInput"
+                        value="{employeeModel>/Experience}"
+                        placeholder="3 Years"/>
+
+                </VBox>
+
+                <!-- Salary -->
+
+                <VBox>
+
+                    <Label text="Annual Salary"/>
+
+                    <Input
+                        id="salaryInput"
+                        value="{employeeModel>/Salary}"
+                        placeholder="800000"/>
+
+                </VBox>
+
+                <!-- Education -->
+
+                <VBox>
+
+                    <Label text="Education"/>
+
+                    <Input
+                        id="educationInput"
+                        value="{employeeModel>/Education}"
+                        placeholder="B.Tech"/>
+
+                </VBox>
+
+                <!-- Skills -->
+
+                <VBox>
+
+                    <Label text="Skills"/>
+
+                    <Input
+                        id="skillsInput"
+                        value="{employeeModel>/Skills}"
+                        placeholder="SAPUI5, JavaScript"/>
+
+                </VBox>
+
+                <!-- Emergency Contact -->
+
+                <VBox>
+
+                    <Label text="Emergency Contact"/>
+
+                    <Input
+                        id="emergencyContactInput"
+                        value="{employeeModel>/EmergencyContact}"
+                        placeholder="Contact Name"/>
+
+                </VBox>
+
+                <!-- Emergency Number -->
+
+                <VBox>
+
+                    <Label text="Emergency Number"/>
+
+                    <Input
+                        id="emergencyPhoneInput"
+                        value="{employeeModel>/EmergencyPhone}"
+                        placeholder="+91 XXXXX XXXXX"/>
+
+                </VBox>
+
+                <!-- Blood Group -->
+
+                <VBox>
+
+                    <Label text="Blood Group"/>
+
+                    <Select selectedKey="{employeeModel>/BloodGroup}" id="bloodGroupSelect" width="100%">
+                        <core:Item key="" text="Select Blood Group"/>
+                        <core:Item key="A+" text="A+"/>
+
+                        <core:Item key="A-" text="A-"/>
+
+                        <core:Item key="B+" text="B+"/>
+
+                        <core:Item key="B-" text="B-"/>
+
+                        <core:Item key="AB+" text="AB+"/>
+
+                        <core:Item key="AB-" text="AB-"/>
+
+                        <core:Item key="O+" text="O+"/>
+
+                        <core:Item key="O-" text="O-"/>
+
+                    </Select>
+
+                </VBox>
+
+                <!-- Notes -->
+
+                <VBox
+                    width="100%">
+
+                    <Label text="Notes"/>
+
+                    <TextArea
+                        id="notesInput"
+                        rows="5"
+                        value="{employeeModel>/Notes}"
+                        placeholder="Additional remarks"/>
+
+                </VBox>
+
+            </l:Grid>
+
+        </content>
+
+    </Panel>
+
+</core:FragmentDefinition>
