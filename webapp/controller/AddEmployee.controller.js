@@ -13,6 +13,13 @@ sap.ui.define([
       var oRouter = this.getOwnerComponent().getRouter();
       oRouter.getRoute("addEmployee").attachPatternMatched(this._onAddMode,this);
       oRouter.getRoute("editEmployee").attachPatternMatched(this._onEditMode,this);
+      this._employeePhoto = "";
+      this._photoInput = document.createElement("input");
+      this._photoInput.type = "file";
+      this._photoInput.accept = "image/*";
+      this._photoInput.style.display = "none";
+      document.body.appendChild(this._photoInput);
+      this._photoInput.onchange = this.onPhotoSelected.bind(this);
     },
 
     // Helper function to generate employee id
@@ -103,6 +110,9 @@ sap.ui.define([
       this.byId("headingSubText").setText("Create a new employee profile for your organization.")
       this.byId("saveBtn").setText("Save Employee");
 
+      this._employeePhoto = "";
+      this._existingPhoto = "";
+      this.byId("employeeAvatar").setSrc("");
       this.byId("nameInput").setValue("");
       this.byId("emailInput").setValue("");
       this.byId("mobileInput").setValue("");
@@ -136,13 +146,14 @@ sap.ui.define([
     // for edit functionality
     _onEditMode: function (oEvent) {
       this._isEditMode = true;
-      console.log("edit mode==>",oEvent.getParameter("arguments"))
       var sId = oEvent.getParameter("arguments").employeeId;
       var oModel = this.getView().getModel();
       var aEmployees = oModel.getProperty("/employees");
-      console.log("aEmployees ==>", aEmployees)
       var oEmployee = aEmployees.find(emp => emp.EmployeeId == sId);
       this._employeeId = sId;
+      this._existingPhoto = oEmployee.Photo || "";
+      this._employeePhoto = oEmployee.Photo || "";
+      this.byId("employeeAvatar").setSrc(oEmployee.Photo);
       this.byId("employeeIdInput").setValue(oEmployee.EmployeeId);
       this.byId("employeePage").setTitle("Edit Employee");
       this.byId("saveBtn").setText("Update Employee");
@@ -221,7 +232,8 @@ sap.ui.define([
       // employee object
       var oEmployee = {
         // Personal Information
-        EmployeeId: this._isEditMode ? this.byId("employeeIdInput").getValue() : this._generatedEmployeeId,
+        EmployeeId: this._isEditMode ? this._employeeId : this._generatedEmployeeId,
+        Photo: this._employeePhoto || "",
         Name: sName,
         Email: email,
         Mobile: mob,
@@ -250,8 +262,6 @@ sap.ui.define([
         EmergencyPhone: emerPhone,
         BloodGroup: bloodG,
         Notes: notes,
-        // Future Ready
-        //ProfileImage: "",
       };
       if (!Validation.validateEmployeeForm(this)) {
         return;
@@ -264,7 +274,6 @@ sap.ui.define([
         this.showToast("Employee added successfully");
       }
       this.updateCounts();
-      console.log(oEmployee)
       this.getOwnerComponent().getRouter().navTo("employeeList");
     },
 
@@ -307,5 +316,75 @@ sap.ui.define([
         })
         .join(" ");
     },
+    
+    // open file picker for photo upload
+    onUploadPhoto: function () {
+      this._photoInput.value = "";
+      this._photoInput.click();
+    },
+
+    onPhotoSelected: function (oEvent) {
+
+    var oFile = oEvent.target.files[0];
+
+    if (!oFile) {
+        return;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        var img = new Image();
+
+        img.onload = function () {
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var SIZE = 150;
+
+            canvas.width = SIZE;
+            canvas.height = SIZE;
+
+            // Determine the largest centered square
+            var cropSize = Math.min(img.width, img.height);
+
+            var sx = (img.width - cropSize) / 2;
+            var sy = (img.height - cropSize) / 2;
+
+            // Crop + Resize
+            ctx.drawImage(
+                img,
+                sx,
+                sy,
+                cropSize,
+                cropSize,
+                0,
+                0,
+                SIZE,
+                SIZE
+            );
+
+            // Compress
+            var compressedImage = canvas.toDataURL(
+                "image/jpeg",
+                0.7
+            );
+
+            this._employeePhoto = compressedImage;
+
+            this.byId("employeeAvatar")
+                .setSrc(compressedImage);
+
+        }.bind(this);
+
+        img.src = e.target.result;
+
+    }.bind(this);
+
+    reader.readAsDataURL(oFile);
+
+},
   });
 });

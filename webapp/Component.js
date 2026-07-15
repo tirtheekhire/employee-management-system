@@ -30,39 +30,15 @@ sap.ui.define([
 				roles: aRoles
 			});
 			this.setModel(oModel);
-			this.updateRoles();
 			this.updateDashboardCounts();
 			// enable routing
 			this.getRouter().initialize();
 		},
 
-		//update role function
-		updateRoles: function () {
-    	var oModel = this.getModel();
-    	var aEmployees = oModel.getProperty("/employees");
-    	var aRoles = [{
-        key: "ALL",
-        text: "All Roles"
-    	}];
-    	aEmployees.forEach(function(employee) {
-        var bExists = aRoles.some(function(role) {
-          return role.key === employee.role;
-        });
-        if (!bExists) {
-          aRoles.push({
-            key: employee.Role,
-            text: employee.Role
-          });
-        }
-    	});
-	    oModel.setProperty("/Role", aRoles);
-    	oModel.refresh(true);
-		},
-
 		// update dashboard count
 		updateDashboardCounts: function () {
     	var oModel = this.getModel();
-    	var aEmployees = oModel.getProperty("/employees");
+    	var aEmployees = oModel.getProperty("/employees" || []);
     	var iActive = aEmployees.filter(e => e.Status === "Active").length;
     	var iLeave = aEmployees.filter(e => e.Status === "On Leave").length;
     	var iInactive = aEmployees.filter(e => e.Status === "Inactive").length;

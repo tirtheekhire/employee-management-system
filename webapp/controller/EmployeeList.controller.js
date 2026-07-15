@@ -64,7 +64,8 @@ sap.ui.define([
 			localStorage.removeItem("employees");
 			var oModel = this.getView().getModel();
 			oModel.setProperty("/employees", []);
-			oModel.setProperty("/employeeCount", 0);
+			this.getOwnerComponent().updateDashboardCounts();
+			oModel.refresh(true);
 			MessageToast.show("Data Cleared");
 		},
 

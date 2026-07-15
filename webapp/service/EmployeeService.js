@@ -15,7 +15,7 @@ sap.ui.define([], function () {
 		},
     updateEmployee: function (oModel, oUpdatedEmployee) {
 			const aEmployees = this.getEmployees(oModel);
-			const iIndex = aEmployees.findIndex(emp => String(emp.id) === String(oUpdatedEmployee.id));
+			const iIndex = aEmployees.findIndex(emp => String(emp.EmployeeId) === String(oUpdatedEmployee.EmployeeId));
       if (iIndex > -1) {
         aEmployees[iIndex] = oUpdatedEmployee;
         this._saveEmployees(oModel, aEmployees);

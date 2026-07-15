@@ -97,6 +97,7 @@ xmlns:form="sap.ui.layout.form">
                 <HBox alignItems="Center">
                   <Avatar
 									displayShape="Circle"
+                  src="{Photo}"
 									initials="{= ${Name}.substring(0,1)}"
 									class="sapUiMediumMarginEnd"/>
                   <VBox>

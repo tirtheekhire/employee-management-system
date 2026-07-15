@@ -16,6 +16,7 @@ xmlns:layout="sap.ui.layout.form">
     			<Avatar
 					displayShape="Circle"
 					displaySize="XL"
+					src="{selectedEmployee>/Photo}"
 					initials="{= ${selectedEmployee>/Name}.substring(0,1)}"
 					class="employeeDetailsAvatar"/>
     			<VBox class="sapUiMediumMarginBegin">

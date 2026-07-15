@@ -18,7 +18,6 @@ sap.ui.define([
 			MessageToast.show(sMessage);
 		},
 		updateCounts: function () {
-			this.getOwnerComponent().updateRoles();
 			this.getOwnerComponent().updateDashboardCounts();
 			var oModel = this.getModel();
 			oModel.setProperty("/employeeCount", oModel.getProperty("/employees").length);

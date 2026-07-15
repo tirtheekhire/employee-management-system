@@ -16,18 +16,20 @@ xmlns:l="sap.ui.layout">
 				alignItems="Center"
 				justifyContent="Center"
 				class="sapUiMediumMarginTop">
-					<Avatar
-					id="employeeAvatar"
-					displayShape="Circle"
-					displaySize="XL"
-					initials="DU"
-					press="onUploadPhoto"
-					class="employeeAvatar"/>
-					<Button
-					text="Upload Photo"
-					icon="sap-icon://camera"
-					type="Transparent"
-					/>
+						<Avatar
+						id="employeeAvatar"
+						displayShape="Circle"
+						displaySize="XL"
+						initials="DU"
+						press="onUploadPhoto"
+						src=""
+						class="employeeAvatar"/>
+						<Button
+						text="Upload Photo"
+						icon="sap-icon://camera"
+						press="onUploadPhoto"
+						type="Transparent"
+						/>
 				</VBox>
       	<!-- Form -->
     		<VBox width="100%">
