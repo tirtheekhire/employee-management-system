@@ -6,8 +6,10 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"../service/EmployeeService"
-], function (BaseController, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator, EmployeeService) {
+	"../service/EmployeeService",
+    "sap/ui/core/Fragment",
+    "sap/ui/model/json/JSONModel"
+], function (BaseController, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator, EmployeeService, Fragment, JSONModel) {
   "use strict";
   return BaseController.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
@@ -68,22 +70,33 @@ sap.ui.define([
 
 		// click on employee card
 		onEmployeePress: function (oEvent) {
-    	var oEmployee = oEvent.getSource().getBindingContext().getObject();
-			var oDialogModel = new sap.ui.model.json.JSONModel(oEmployee);
-    	this.getView().setModel(oDialogModel, "dialog");
-			this.byId("employeeDialog").open();
+      var oEmployee = oEvent.getSource().getBindingContext().getObject();
+      this._openEmployeeDialog(oEmployee);
+    },
+
+    //open dialog
+    _openEmployeeDialog: function (oEmployee) {
+			var oView = this.getView();
+			if (!this._pEmployeeDialog) {
+				this._pEmployeeDialog = Fragment.load({
+						id: oView.getId(),
+						name: "com.example.employeeapp.employeeapp.fragments.EmployeeDetailsDialog",
+						controller: this
+				}).then(function (oDialog) {
+				oView.addDependent(oDialog);
+				return oDialog;
+				});
+			}
+			this._pEmployeeDialog.then(function (oDialog) {
+				var oModel = new JSONModel(oEmployee);
+				oDialog.setModel(oModel, "selectedEmployee");
+				oDialog.open();
+			});
 		},
 
 		// close dialog
 		onCloseEmployeeDialog: function () {
-    	this.byId("employeeDialog").close();
-		},
-
-		// edit from dialog
-		onDialogEdit: function () {
-    	var oEmployee = this.getView().getModel("dialog").getData();
-    	this.byId("employeeDialog").close();
-    	this.getOwnerComponent().getRouter().navTo("editEmployee", {employeeId: oEmployee.id});
+    	this.byId("employeeDetailsDialog").close();
 		},
 
 		// sorting method Ascending order
@@ -108,28 +121,6 @@ sap.ui.define([
     	);
     	oBinding.sort(oSorter);
     	MessageToast.show("Sorted Z-A");
-		},
-
-		// filter function
-		onRoleFilter: function (oEvent) {
-    	var sRole = oEvent.getSource().getSelectedKey();
-    	var oList = this.byId("employeeList");
-    	var oBinding = oList.getBinding("items");
-    	if (sRole === "ALL") {
-        oBinding.filter([]);
-        return;
-    	}
-    	var oFilter = new Filter(
-        "role",
-        FilterOperator.EQ,
-        sRole
-    	);
-    	oBinding.filter([oFilter]);
-		},
-
-		onAfterRendering: function () {
-    	var oModel = this.getView().getModel();
-    	var oSelect = this.byId("roleFilter");
 		},
 
 		//export csv

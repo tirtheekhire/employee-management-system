@@ -10,74 +10,49 @@ xmlns:layout="sap.ui.layout.form">
     title="{= ${view>/isEdit} ? 'Edit Employee' : 'Add Employee'}"
     showNavButton="true"
     navButtonPress="onNavBack">
-
-    <content>
-
+   		<content>
         <VBox class="employeePage">
-
-            <!-- Header -->
-            <VBox class="employeeHeaderCard">
-
-                <Title
-										id="headingText"
-                    text="{= ${view>/isEdit} ? 'Edit Employee' : 'Add New Employee'}"
-                    class="employeeHeaderTitle"/>
-
-                <Text
-                    id="headingSubText"
-                    class="employeeHeaderSubtitle"/>
-
-            </VBox>
-
-            <!-- Personal -->
-
-            <core:Fragment
-                fragmentName="com.example.employeeapp.employeeapp.fragments.PersonalInfo"
-                type="XML"/>
-
-            <!-- Job -->
-
-            <core:Fragment
-                fragmentName="com.example.employeeapp.employeeapp.fragments.JobInfo"
-                type="XML"/>
-
-            <!-- Address -->
-
-            <core:Fragment
-                fragmentName="com.example.employeeapp.employeeapp.fragments.Address"
-                type="XML"/>
-
-            <!-- Professional -->
-
-            <core:Fragment
-                fragmentName="com.example.employeeapp.employeeapp.fragments.ProfessionalInfo"
-                type="XML"/>
-
+					<!-- Header -->
+					<VBox class="employeeHeaderCard">
+						<Title
+						id="headingText"
+						text="{= ${view>/isEdit} ? 'Edit Employee' : 'Add New Employee'}"
+						class="employeeHeaderTitle"/>
+						<Text
+						id="headingSubText"
+						class="employeeHeaderSubtitle"/>
+					</VBox>
+          <!-- Personal -->
+          <core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.PersonalInfo"
+					type="XML"/>
+          <!-- Job -->
+					<core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.JobInfo"
+					type="XML"/>
+          <!-- Address -->
+					<core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.Address"
+					type="XML"/>
+          <!-- Professional -->
+          <core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.ProfessionalInfo"
+					type="XML"/>
         </VBox>
-
-    </content>
-
-    <footer>
-
+    	</content>
+    	<footer>
         <OverflowToolbar>
-
-            <ToolbarSpacer/>
-
-            <Button
-                text="Cancel"
-                press="onNavBack"/>
-
-            <Button
-								id="saveBtn"
-
-                type="Emphasized"
-                text="Save"
-                press="onSaveEmployee"/>
-
+          <ToolbarSpacer/>
+          <Button
+					text="Cancel"
+					press="onNavBack"/>
+          <Button
+					id="saveBtn"
+					type="Emphasized"
+					text="Save"
+					press="onSaveEmployee"/>
         </OverflowToolbar>
-
-    </footer>
-
-</Page>
+    	</footer>
+		</Page>
   </App>
 </mvc:View>

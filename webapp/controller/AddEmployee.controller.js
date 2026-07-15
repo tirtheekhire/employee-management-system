@@ -131,9 +131,6 @@ sap.ui.define([
       this.byId("emergencyPhoneInput").setValue("");
       this.byId("bloodGroupSelect").setSelectedKey("");
       this.byId("notesInput").setValue("");
-
-      // this.byId("nameInput").setValueState("None");
-      // this.byId("roleInput").setValueState();
     },
 
     // for edit functionality
@@ -255,8 +252,6 @@ sap.ui.define([
         Notes: notes,
         // Future Ready
         //ProfileImage: "",
-        //CreatedAt: this._isEditMode ? this._createdAt : new Date().toISOString(),
-        //UpdatedAt: new Date().toISOString()
       };
       if (!Validation.validateEmployeeForm(this)) {
         return;
@@ -266,7 +261,6 @@ sap.ui.define([
         this.showToast("Employee updated successfully");
       } else {
         EmployeeService.addEmployee(oModel, oEmployee);
-        // this.getView().bindElement({ path: "/", model: "employeeModel"});
         this.showToast("Employee added successfully");
       }
       this.updateCounts();

@@ -13,7 +13,6 @@ sap.ui.define([], function () {
 					return "None";
 			}
 		},
-
 		getStatusIcon: function (sStatus) {
 			switch (sStatus) {
 				case "Active":

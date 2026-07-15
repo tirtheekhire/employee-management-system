@@ -1,0 +1,118 @@
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:layout="sap.ui.layout.form">
+  <Dialog
+	id="employeeDetailsDialog"
+	title="Employee Details"
+	contentWidth="950px"
+	contentHeight="650px"
+	draggable="true"
+	resizable="true"
+	stretchOnPhone="true">
+    <content>
+    	<VBox class="sapUiMediumMargin">
+        <HBox alignItems="Center" class="sapUiMediumMargin">
+    			<Avatar
+					displayShape="Circle"
+					displaySize="XL"
+					initials="{= ${selectedEmployee>/Name}.substring(0,1)}"
+					class="employeeDetailsAvatar"/>
+    			<VBox class="sapUiMediumMarginBegin">
+        		<Title text="{selectedEmployee>/Name}"/>
+        		<Text text="{selectedEmployee>/EmployeeId}"/>
+        		<ObjectStatus text="{selectedEmployee>/Role}" state="Information"/>
+        		<ObjectStatus text="{selectedEmployee>/Department}" state="None"/>
+        		<ObjectStatus text="{selectedEmployee>/Status}"
+            state="{=
+                ${selectedEmployee>/Status}==='Active' ? 'Success' :
+                ${selectedEmployee>/Status}==='Inactive' ? 'Error' :
+                'Warning'
+            }"/>
+    			</VBox>
+				</HBox>
+        <IconTabBar expandable="false">
+        	<items>
+            <!-- Personal -->
+            <IconTabFilter text="Personal" icon="sap-icon://person-placeholder">
+							<layout:SimpleForm
+							editable="false"
+							layout="ResponsiveGridLayout">
+								<Label text="Employee ID"/>
+								<Text text="{selectedEmployee>/EmployeeId}"/>
+								<Label text="Full Name"/>
+								<Text text="{selectedEmployee>/Name}"/>
+								<Label text="Email"/>
+								<Text text="{selectedEmployee>/Email}"/>
+								<Label text="Mobile"/>
+								<Text text="{selectedEmployee>/Mobile}"/>
+								<Label text="Gender"/>
+								<Text text="{selectedEmployee>/Gender}"/>
+								<Label text="Date of Birth"/>
+								<Text text="{selectedEmployee>/DateOfBirth}"/>
+							</layout:SimpleForm>
+            </IconTabFilter>
+            <!-- Job -->
+            <IconTabFilter text="Job" icon="sap-icon://work-history">
+              <layout:SimpleForm
+							editable="false"
+							layout="ResponsiveGridLayout">
+								<Label text="Department"/>
+								<Text text="{selectedEmployee>/Department}"/>
+								<Label text="Role"/>
+								<Text text="{selectedEmployee>/Role}"/>
+								<Label text="Employment Type"/>
+								<Text text="{selectedEmployee>/EmploymentType}"/>
+								<Label text="Joining Date"/>
+								<Text text="{selectedEmployee>/JoiningDate}"/>
+								<Label text="Experience"/>
+								<Text text="{selectedEmployee>/Experience}"/>
+								<Label text="Manager"/>
+								<Text text="{selectedEmployee>/Manager}"/>
+								<Label text="Salary"/>
+								<ObjectNumber number="{selectedEmployee>/Salary}"/>
+              </layout:SimpleForm>
+            </IconTabFilter>
+            <!-- Address -->
+            <IconTabFilter text="Address" icon="sap-icon://map">
+							<layout:SimpleForm
+							editable="false"
+							layout="ResponsiveGridLayout">
+								<Label text="City"/>
+								<Text text="{selectedEmployee>/City}"/>
+								<Label text="State"/>
+								<Text text="{selectedEmployee>/State}"/>
+								<Label text="Country"/>
+								<Text text="{selectedEmployee>/Country}"/>
+							</layout:SimpleForm>
+            </IconTabFilter>
+            <!-- Professional -->
+            <IconTabFilter text="Professional" icon="sap-icon://study-leave">
+              <layout:SimpleForm
+							editable="false"
+							layout="ResponsiveGridLayout">
+								<Label text="Education"/>
+								<Text text="{selectedEmployee>/Education}"/>
+								<Label text="Skills"/>
+								<Text text="{selectedEmployee>/Skills}"/>
+								<Label text="Blood Group"/>
+								<Text text="{selectedEmployee>/BloodGroup}"/>
+								<Label text="Emergency Contact"/>
+								<Text text="{selectedEmployee>/EmergencyContact}"/>
+								<Label text="Emergency Number"/>
+								<Text text="{selectedEmployee>/EmergencyNumber}"/>
+								<Label text="Notes"/>
+								<Text text="{selectedEmployee>/Notes}"/>
+              </layout:SimpleForm>
+            </IconTabFilter>
+          </items>
+        </IconTabBar>
+      </VBox>
+    </content>
+    <endButton>
+      <Button
+			text="Close"
+			press="onCloseEmployeeDialog"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

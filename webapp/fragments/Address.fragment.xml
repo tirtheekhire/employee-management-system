@@ -1,101 +1,64 @@
 <core:FragmentDefinition
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:l="sap.ui.layout">
-
-    <Panel
-        headerText="Address"
-        class="employeePanel">
-
-        <content>
-
-            <l:Grid
-                defaultSpan="XL6 L6 M6 S12"
-                hSpacing="1"
-                vSpacing="1">
-
-                <!-- Address Line 1 -->
-
-                <VBox>
-
-                    <Label text="Address Line 1"/>
-
-                    <Input
-                        id="address1Input"
-                        value="{employeeModel>/Address1}"
-                        placeholder="House No, Street"/>
-
-                </VBox>
-
-                <!-- Address Line 2 -->
-
-                <VBox>
-
-                    <Label text="Address Line 2"/>
-
-                    <Input
-                        id="address2Input"
-                        value="{employeeModel>/Address2}"
-                        placeholder="Apartment, Landmark"/>
-
-                </VBox>
-
-                <!-- City -->
-
-                <VBox>
-
-                    <Label text="City"/>
-
-                    <Input
-                        id="cityInput"
-                        value="{employeeModel>/City}"
-                        placeholder="City"/>
-
-                </VBox>
-
-                <!-- State -->
-
-                <VBox>
-
-                    <Label text="State"/>
-
-                    <Input
-                        id="stateInput"
-                        value="{employeeModel>/State}"
-                        placeholder="State"/>
-
-                </VBox>
-
-                <!-- Country -->
-
-                <VBox>
-
-                    <Label text="Country"/>
-
-                    <Input
-                        id="countryInput"
-                        value="{employeeModel>/Country}"
-                        placeholder="Country"/>
-
-                </VBox>
-
-                <!-- PIN -->
-
-                <VBox>
-
-                    <Label text="PIN Code"/>
-
-                    <Input
-                        id="pincodeInput"
-                        value="{employeeModel>/Pincode}"
-                        placeholder="452001"/>
-
-                </VBox>
-
-            </l:Grid>
-
-        </content>
-
-    </Panel>
-
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:l="sap.ui.layout">
+  <Panel
+	headerText="Address"
+	class="employeePanel">
+    <content>
+    	<l:Grid
+			defaultSpan="XL6 L6 M6 S12"
+			hSpacing="1"
+			vSpacing="1">
+				<!-- Address Line 1 -->
+				<VBox>
+					<Label text="Address Line 1"/>
+					<Input
+					id="address1Input"
+					value="{employeeModel>/Address1}"
+					placeholder="House No, Street"/>
+				</VBox>
+				<!-- Address Line 2 -->
+				<VBox>
+					<Label text="Address Line 2"/>
+					<Input
+					id="address2Input"
+					value="{employeeModel>/Address2}"
+					placeholder="Apartment, Landmark"/>
+				</VBox>
+				<!-- City -->
+				<VBox>
+					<Label text="City"/>
+					<Input
+					id="cityInput"
+					value="{employeeModel>/City}"
+					placeholder="City"/>
+				</VBox>
+        <!-- State -->
+				<VBox>
+					<Label text="State"/>
+					<Input
+					id="stateInput"
+					value="{employeeModel>/State}"
+					placeholder="State"/>
+				</VBox>
+        <!-- Country -->
+				<VBox>
+					<Label text="Country"/>
+					<Input
+					id="countryInput"
+					value="{employeeModel>/Country}"
+					placeholder="Country"/>
+				</VBox>
+        <!-- PIN -->
+				<VBox>
+					<Label text="PIN Code"/>
+					<Input
+					id="pincodeInput"
+					value="{employeeModel>/Pincode}"
+					placeholder="452001"/>
+				</VBox>
+      </l:Grid>
+    </content>
+  </Panel>
 </core:FragmentDefinition>

@@ -1,116 +1,76 @@
 <core:FragmentDefinition
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:l="sap.ui.layout">
-
-    <Panel
-        headerText="Job Information"
-        class="employeePanel">
-
-        <content>
-
-            <l:Grid
-                defaultSpan="XL6 L6 M6 S12"
-                hSpacing="1"
-                vSpacing="1">
-
-                <!-- Department -->
-
-                <VBox>
-
-                    <Label text="Department"/>
-
-                    <Select selectedKey="{employeeModel>/Department}" id="departmentSelect" change="onSelectValidation" width="100%">
-                        <core:Item key="" text="Select Department"/>
-                        <core:Item key="IT" text="IT"/>
-                        <core:Item key="HR" text="Human Resources"/>
-                        <core:Item key="Finance" text="Finance"/>
-                        <core:Item key="Sales" text="Sales"/>
-                        <core:Item key="Marketing" text="Marketing"/>
-                        <core:Item key="Support" text="Customer Support"/>
-
-                    </Select>
-
-                </VBox>
-
-                <!-- Role -->
-
-                <VBox>
-
-                    <Label text="Role"/>
-
-                    <Input
-                        id="roleInput"
-                        value="{employeeModel>/Role}"
-                        placeholder="Software Engineer"
-                        liveChange="onInputValidation"/>
-
-                </VBox>
-
-                <!-- Employment Type -->
-
-                <VBox>
-
-                    <Label text="Employment Type"/>
-
-                    <Select selectedKey="{employeeModel>/EmploymentType}" id="employmentTypeSelect" change="onSelectValidation" width="100%">
-                        <core:Item key="" text="Select Employment Type"/>
-                        <core:Item key="Permanent" text="Permanent"/>
-                        <core:Item key="Contract" text="Contract"/>
-                        <core:Item key="Intern" text="Intern"/>
-                        <core:Item key="Consultant" text="Consultant"/>
-
-                    </Select>
-
-                </VBox>
-
-                <!-- Status -->
-
-                <VBox>
-
-                    <Label text="Status"/>
-
-                    <Select selectedKey="{employeeModel>/Status}" id="statusSelect" change="onSelectValidation" width="100%">
-                        <core:Item key="" text="Select Status"/>
-                        <core:Item key="Active" text="Active"/>
-                        <core:Item key="Inactive" text="Inactive"/>
-                        <core:Item key="On Leave" text="On Leave"/>
-
-                    </Select>
-
-                </VBox>
-
-                <!-- Joining Date -->
-
-                <VBox>
-
-                    <Label text="Joining Date"/>
-
-                    <DatePicker
-                        id="joiningDatePicker"
-                        value="{employeeModel>/JoiningDate}"
-                        displayFormat="dd/MM/yyyy"
-                        change="onDateValidation"/>
-
-                </VBox>
-
-                <!-- Reporting Manager -->
-
-                <VBox>
-
-                    <Label text="Reporting Manager"/>
-
-                    <Input
-                        id="managerInput"
-                        value="{employeeModel>/Manager}"
-                        placeholder="Manager Name"/>
-
-                </VBox>
-
-            </l:Grid>
-
-        </content>
-
-    </Panel>
-
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:l="sap.ui.layout">
+  <Panel
+	headerText="Job Information"
+	class="employeePanel">
+    <content>
+      <l:Grid
+			defaultSpan="XL6 L6 M6 S12"
+			hSpacing="1"
+			vSpacing="1">
+        <!-- Department -->
+				<VBox>
+					<Label text="Department"/>
+					<Select selectedKey="{employeeModel>/Department}" id="departmentSelect" change="onSelectValidation" width="100%">
+						<core:Item key="" text="Select Department"/>
+						<core:Item key="IT" text="IT"/>
+						<core:Item key="HR" text="Human Resources"/>
+						<core:Item key="Finance" text="Finance"/>
+						<core:Item key="Sales" text="Sales"/>
+						<core:Item key="Marketing" text="Marketing"/>
+						<core:Item key="Support" text="Customer Support"/>
+					</Select>
+				</VBox>
+				<!-- Role -->
+				<VBox>
+					<Label text="Role"/>
+					<Input
+					id="roleInput"
+					value="{employeeModel>/Role}"
+					placeholder="Software Engineer"
+					liveChange="onInputValidation"/>
+				</VBox>
+				<!-- Employment Type -->
+				<VBox>
+					<Label text="Employment Type"/>
+					<Select selectedKey="{employeeModel>/EmploymentType}" id="employmentTypeSelect" change="onSelectValidation" width="100%">
+						<core:Item key="" text="Select Employment Type"/>
+						<core:Item key="Permanent" text="Permanent"/>
+						<core:Item key="Contract" text="Contract"/>
+						<core:Item key="Intern" text="Intern"/>
+						<core:Item key="Consultant" text="Consultant"/>
+					</Select>
+				</VBox>
+				<!-- Status -->
+				<VBox>
+					<Label text="Status"/>
+					<Select selectedKey="{employeeModel>/Status}" id="statusSelect" change="onSelectValidation" width="100%">
+						<core:Item key="" text="Select Status"/>
+						<core:Item key="Active" text="Active"/>
+						<core:Item key="Inactive" text="Inactive"/>
+						<core:Item key="On Leave" text="On Leave"/>
+					</Select>
+				</VBox>
+				<!-- Joining Date -->
+				<VBox>
+					<Label text="Joining Date"/>
+					<DatePicker
+					id="joiningDatePicker"
+					value="{employeeModel>/JoiningDate}"
+					displayFormat="dd/MM/yyyy"
+					change="onDateValidation"/>
+				</VBox>
+				<!-- Reporting Manager -->
+				<VBox>
+					<Label text="Reporting Manager"/>
+					<Input
+					id="managerInput"
+					value="{employeeModel>/Manager}"
+					placeholder="Manager Name"/>
+				</VBox>
+      </l:Grid>
+    </content>
+  </Panel>
 </core:FragmentDefinition>
