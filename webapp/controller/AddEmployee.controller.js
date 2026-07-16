@@ -1,11 +1,9 @@
 sap.ui.define([
   "./BaseController",
   "sap/ui/core/UIComponent",
-  "sap/m/MessageToast",
-  "sap/m/MessageBox",
   "../util/Validation",
   "../service/EmployeeService"
-], function (BaseController, UIComponent, MessageToast, MessageBox, Validation, EmployeeService) {
+], function (BaseController, UIComponent, Validation, EmployeeService) {
   "use strict";
   return BaseController.extend("com.example.employeeapp.employeeapp.controller.AddEmployee", {
 
@@ -111,7 +109,6 @@ sap.ui.define([
       this.byId("saveBtn").setText("Save Employee");
 
       this._employeePhoto = "";
-      this._existingPhoto = "";
       this.byId("employeeAvatar").setSrc("");
       this.byId("nameInput").setValue("");
       this.byId("emailInput").setValue("");
@@ -151,7 +148,6 @@ sap.ui.define([
       var aEmployees = oModel.getProperty("/employees");
       var oEmployee = aEmployees.find(emp => emp.EmployeeId == sId);
       this._employeeId = sId;
-      this._existingPhoto = oEmployee.Photo || "";
       this._employeePhoto = oEmployee.Photo || "";
       this.byId("employeeAvatar").setSrc(oEmployee.Photo);
       this.byId("employeeIdInput").setValue(oEmployee.EmployeeId);

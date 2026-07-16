@@ -2,14 +2,13 @@ sap.ui.define([
 	"./BaseController",
 	"../model/formatter",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"../service/EmployeeService",
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel"
-], function (BaseController, formatter, MessageBox, MessageToast, Sorter, Filter, FilterOperator, EmployeeService, Fragment, JSONModel) {
+], function (BaseController, formatter, MessageBox, Sorter, Filter, FilterOperator, EmployeeService, Fragment, JSONModel) {
   "use strict";
   return BaseController.extend("com.example.employeeapp.employeeapp.controller.EmployeeList",
   {
@@ -66,7 +65,7 @@ sap.ui.define([
 			oModel.setProperty("/employees", []);
 			this.getOwnerComponent().updateDashboardCounts();
 			oModel.refresh(true);
-			MessageToast.show("Data Cleared");
+			this.showToast("Data Cleared");
 		},
 
 		// click on employee card
@@ -109,7 +108,7 @@ sap.ui.define([
         false
     	);
     	oBinding.sort(oSorter);
-    	MessageToast.show("Sorted A-Z");
+    	this.showToast("Sorted A-Z");
 		},
 
 		// sorting method Descending order
@@ -121,7 +120,7 @@ sap.ui.define([
         true
     	);
     	oBinding.sort(oSorter);
-    	MessageToast.show("Sorted Z-A");
+    	this.showToast("Sorted Z-A");
 		},
 
 		//export csv
@@ -141,7 +140,7 @@ sap.ui.define([
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-				MessageToast.show("Employees exported successfully");
+		this.showToast("Employees exported successfully");
     	}
 		},
   });
