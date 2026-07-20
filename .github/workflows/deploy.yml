@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: employeeapp/package-lock.json
+          cache-dependency-path: ../webapp/package-lock.json
 
       - name: Install dependencies
         working-directory: employeeapp
@@ -42,7 +42,7 @@ jobs:
       - name: Upload production build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: employeeapp/dist
+          path: ../dist
 
   deploy:
     environment:
