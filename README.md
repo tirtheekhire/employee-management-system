@@ -10,9 +10,7 @@ The application enables HR teams to efficiently manage employee information thro
 
 ## Live Demo
 
-*(Add after deployment)*
-
-**Application:** https://your-app-url
+**Application:** https://tirtheekhire.github.io/employee-management-system/
 
 ---
 
