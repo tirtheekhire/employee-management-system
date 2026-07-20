@@ -30,17 +30,15 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
-        working-directory: employeeapp
         run: npm install
 
       - name: Build SAPUI5 application
-        working-directory: employeeapp
         run: npm run build
 
       - name: Upload production build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: employeeapp/dist
+          path: dist
 
   deploy:
     environment:
