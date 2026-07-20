@@ -14,22 +14,64 @@ sap.ui.define([
 		init() {
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
-			// local json data
-			var oData = {
-				employees: [
-					{ id: 1, name: "Rahul", role: "Manager" },
-					{ id: 2, name: "Anita", role: "HR" }
-				]
-			};
-			// var oModel = new sap.ui.model.json.JSONModel( oData);
 			var aEmployees = JSON.parse(localStorage.getItem("employees")) || [];
+			var aRoles = ["ALL"];
+			aEmployees.forEach(function (employee) {
+    			if (!aRoles.includes(employee.Role)) {
+        		aRoles.push(employee.Role);
+    			}
+			});
 			var oModel = new sap.ui.model.json.JSONModel({
-    		employees: aEmployees,
-    		employeeCount: aEmployees.length
+				employees: aEmployees,
+				employeeCount: aEmployees.length,
+				activeCount: 0,
+				leaveCount: 0,
+				inactiveCount: 0,
+				roles: aRoles
 			});
 			this.setModel(oModel);
+			this.updateDashboardCounts();
 			// enable routing
 			this.getRouter().initialize();
-		}
+		},
+
+		// update dashboard count
+		updateDashboardCounts: function () {
+    	var oModel = this.getModel();
+    	var aEmployees = oModel.getProperty("/employees" || []);
+    	var iActive = aEmployees.filter(e => e.Status === "Active").length;
+    	var iLeave = aEmployees.filter(e => e.Status === "On Leave").length;
+    	var iInactive = aEmployees.filter(e => e.Status === "Inactive").length;
+    	oModel.setProperty("/employeeCount",aEmployees.length);
+    	oModel.setProperty("/activeCount",iActive);
+    	oModel.setProperty("/leaveCount",iLeave);
+    	oModel.setProperty("/inactiveCount",iInactive);
+			// employee statistics 
+			var iTotal = aEmployees.length;
+			oModel.setProperty(
+    		"/activePercentage",
+    		iTotal
+        ? Math.round(
+            (iActive / iTotal) * 100
+          )
+        : 0
+			);
+			oModel.setProperty(
+    		"/inactivePercentage",
+    		iTotal
+        ? Math.round(
+            (iInactive / iTotal) * 100
+          )
+        : 0
+			);
+			oModel.setProperty(
+    		"/leavePercentage",
+    		iTotal
+        ? Math.round(
+            (iLeave / iTotal) * 100
+          )
+        : 0
+			);
+		},
   });
 });

@@ -1,38 +1,225 @@
+/* Dashboard */
+.dashboardContainer{
+	padding:20px;
+	background:#f5f7fa;
+}
+/* Header */
+.dashboardHeader{
+	background:linear-gradient(90deg,#0a6ed1,#3fa9f5);
+	color:white;
+	padding:30px;
+	border-radius:18px;
+	box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.dashboardHeader .sapMTitle{
+  color:white;
+}
+.dashboardHeader .sapMText{
+  color:#f0f5ff;
+}
+/* KPI */
+.kpiCard{
+	width:220px;
+	height:150px;
+	margin:15px;
+	border-radius:18px;
+	color:white;
+	justify-content:center;
+	align-items:center;
+	box-shadow:0 10px 25px rgba(0,0,0,.15);
+	transition:.3s;
+}
+.kpiCard:hover{
+  transform:translateY(-6px);
+}
+.totalCard{
+  background:linear-gradient(135deg,#1976d2,#42a5f5);
+}
+.sapMObjectNumberText {
+  display: inline !important;
+}
+.activeCard{
+  background:linear-gradient(135deg,#2e7d32,#66bb6a);
+}
+.inactiveCard{
+  background:linear-gradient(135deg,#c62828,#ef5350);
+}
+.leaveCard{
+  background:linear-gradient(135deg,#ef6c00,#ffb74d);
+}
+.kpiCard .sapMTitle{
+  color:white;
+}
+.kpiCard .sapMObjectNumber{
+  color:white;
+  font-size:2rem;
+}
+/* Statistics */
+.dashboardPanel{
+	margin-top:25px;
+	border-radius:15px;
+	overflow:hidden;
+	box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+/* Toolbar */
+.dashboardToolbar{
+	margin:25px 0;
+	padding:20px;
+	border-radius:15px;
+	background:white;
+	box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+/* Employee Card */
+.employeeCard{
+	padding:18px;
+	border-radius:15px;
+	background:white;
+	margin:10px;
+	box-shadow:0 6px 15px rgba(0,0,0,.08);
+	transition:.3s;
+}
+.employeeCard:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+/* Avatar */
+.sapFAvatar{
+  color:white;
+  font-weight:bold;
+}
+/* Buttons */
+.sapMBtnEmphasized{
+  border-radius:10px;
+}
+.sapMBtnTransparent{
+  border-radius:8px;
+}
+.searchField{
+  width:22rem;
+}
+.searchField .sapMSFF{
+  border-radius:30px;
+}
+/* Employee Add Page */
+.employeePage {
+  background: #f5f7fa;
+}
+/* Header */
+.employeeHeader {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #1d2d44;
+}
+/* Card */
 .employeeCard {
-    border-radius: 12px;
+	border-radius: 16px !important;
+	border: none !important;
+	background: white !important;
+	box-shadow: 0 8px 24px rgba(0,0,0,.08);
+	padding: 1rem;
 }
-.employeeCard .sapMPanelContent {
-    padding: 1.5rem;
+/* Form Labels */
+.employeeCard .sapMLabel {
+	font-weight: 600;
+	color: #34495e;
 }
-/* Enter your custom styles here */
-.employeeItem {
-    padding: 1rem;
-    border-radius: 0.75rem;
-    border-left: 4px solid #0a6ed1;
-    background: #ffffff;
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
-    transition: all 0.25s ease;
-    cursor: pointer;
+/* Inputs */
+.employeeCard .sapMInputBase,
+.employeeCard .sapMSlt {
+  border-radius: 8px;
 }
-.employeeItem:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.375rem 1rem rgba(0,0,0,0.15);
-    background-color: #f8fbff;
+/* Panel Header */
+.employeeCard .sapMPanelHdr {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
-/* add employee button css */
-.sapMBtn:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
+/* Message Strip */
+.employeeCard .sapMMsgStrip {
+  border-radius: 8px;
 }
-/* edit and delete button css */
-.employeeActionBtn {
-    transition: all 0.2s ease;
+/* Footer */
+.sapMFooter-CTX {
+  background: white;
+  border-top: 1px solid #e5e7eb;
 }
-.employeeActionBtn:hover {
-    transform: scale(1.1);
+/* Save Button */
+#saveBtn {
+  min-width: 160px;
 }
-/* employee image css */
-.sapFAvatar:hover {
-    transform: scale(1.08);
-    transition: transform 0.2s ease;
+/* Responsive */
+@media (max-width: 768px) {
+  .employeeCard {
+    width: 95% !important;
+  }
+}
+/* Employee Details Dialog */
+.employeeDialog .sapMDialogTitle {
+	font-size: 1.3rem;
+  font-weight: 700;
+}
+.employeeDialog .sapMPanel {
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+.employeeDialog .sapMPanelHdr {
+  font-weight: 600;
+}
+.employeeDialog .sapMLabel {
+  font-weight: 600;
+}
+.employeeDialog .sapMBtn {
+  min-width: 8rem;
+}
+/* add employee */
+.employeePage{
+  max-width:1100px;
+  margin:auto;
+}
+.employeeHeaderCard{
+	background:linear-gradient(135deg,#1976d2,#42a5f5);
+	border-radius:18px;
+	padding:2rem;
+	margin-top: 2rem;
+	margin-bottom:2rem;
+	box-shadow:0 8px 24px rgba(0,0,0,.15);
+}
+.employeeHeaderTitle{
+	color:white;
+	font-size:2rem;
+	font-weight:700;
+}
+.employeeHeaderSubtitle{
+	color:rgba(255,255,255,.9);
+	margin-top:.4rem;
+}
+.employeePanel{
+	margin-bottom:1.5rem;
+	border-radius:14px;
+	overflow:hidden;
+	box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+.employeePanel .sapMPanelHdr{
+	background:#f8fafc;
+	color:#1d4ed8;
+	font-weight:700;
+	font-size:1rem;
+}
+.employeePanel .sapMPanelContent{
+  padding:1.5rem;
+}
+.employeeAvatar{
+	border:5px solid #ffffff;
+	box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.employeePanel .sapMLabel{
+	font-weight:600;
+	color:#334155;
+	margin-bottom:.3rem;
+}
+.employeePanel .sapMInputBase,
+.employeePanel .sapMSlt{
+  width:100%;
+}
+.employeePanel .sapMVBox{
+  width:100%;
 }

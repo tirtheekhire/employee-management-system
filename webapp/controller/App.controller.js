@@ -5,7 +5,5 @@ sap.ui.define([
 "use strict";
 
 return Controller.extend("com.example.employeeapp.employeeapp.controller.App", {
-	onInit() {
-	},
 	});
 });

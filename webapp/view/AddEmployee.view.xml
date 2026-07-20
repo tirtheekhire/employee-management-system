@@ -2,62 +2,57 @@
 controllerName="com.example.employeeapp.employeeapp.controller.AddEmployee"
 xmlns:mvc="sap.ui.core.mvc"
 xmlns="sap.m"
-xmlns:form="sap.ui.layout.form"
->
-  <App id="_IDGenApp">
-  	<Page id="employeePage"
-    title="Add Employee"
+xmlns:core="sap.ui.core"
+xmlns:layout="sap.ui.layout.form">
+  <App>
+    <Page
+    id="employeePage"
+    title="{= ${view>/isEdit} ? 'Edit Employee' : 'Add Employee'}"
     showNavButton="true"
     navButtonPress="onNavBack">
-    	<content>
-      	<VBox id="_IDGenVBox1"
-        width="100%"
-        alignItems="Center"
-        class="sapUiResponsiveContentPadding">
-        	<Panel id="_IDGenPanel"
-					headerText="Employee Information"
-					width="100%"
-					class="employeeCard">
-            <content>
-              <MessageStrip id="_IDGenMessageStrip"
-							text="Enter employee details and save."
-							type="Information"
-							showIcon="true"
-							class="sapUiSmallMarginBottom"/>
-              <form:SimpleForm id="_IDGenSimpleForm"
-							editable="true"
-							layout="ResponsiveGridLayout">
-                <Label id="_IDGenLabel" text="Employee Name"/>
-								<Input
-								id="nameInput"
-								placeholder="John Smith"
-								required="true"
-								valueLiveUpdate="true"/>
-                <Label id="_IDGenLabel1" text="Role"/>
-                <Input
-								id="roleInput"
-								placeholder="Frontend Developer"
-								required="true"
-								valueLiveUpdate="true"/>
-              </form:SimpleForm>
-            </content>
-          </Panel>
+   		<content>
+        <VBox class="employeePage">
+					<!-- Header -->
+					<VBox class="employeeHeaderCard">
+						<Title
+						id="headingText"
+						text="{= ${view>/isEdit} ? 'Edit Employee' : 'Add New Employee'}"
+						class="employeeHeaderTitle"/>
+						<Text
+						id="headingSubText"
+						class="employeeHeaderSubtitle"/>
+					</VBox>
+          <!-- Personal -->
+          <core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.PersonalInfo"
+					type="XML"/>
+          <!-- Job -->
+					<core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.JobInfo"
+					type="XML"/>
+          <!-- Address -->
+					<core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.Address"
+					type="XML"/>
+          <!-- Professional -->
+          <core:Fragment
+					fragmentName="com.example.employeeapp.employeeapp.fragments.ProfessionalInfo"
+					type="XML"/>
         </VBox>
     	</content>
     	<footer>
-        <OverflowToolbar id="_IDGenOverflowToolbar">
-          <ToolbarSpacer id="_IDGenToolbarSpacer" />
-          <Button id="_IDGenButton1"
+        <OverflowToolbar>
+          <ToolbarSpacer/>
+          <Button
 					text="Cancel"
-					press="onNavBack"
-					/>
-					<Button id="saveBtn"
-					text="Save Employee"
-					icon="sap-icon://save"
+					press="onNavBack"/>
+          <Button
+					id="saveBtn"
 					type="Emphasized"
+					text="Save"
 					press="onSaveEmployee"/>
         </OverflowToolbar>
     	</footer>
-  	</Page>
-	</App>
+		</Page>
+  </App>
 </mvc:View>

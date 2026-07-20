@@ -1,53 +1,138 @@
-## Application Details
-|               |
-| ------------- |
-|**Generation Date and Time**<br>Thu May 14 2026 14:53:51 GMT+0530 (India Standard Time)|
-|**App Generator**<br>SAP Fiori Application Generator|
-|**App Generator Version**<br>1.24.0|
-|**Generation Platform**<br>CLI|
-|**Template Used**<br>Basic|
-|**Service Type**<br>None|
-|**Service URL**<br>N/A|
-|**Module Name**<br>employeeapp|
-|**Application Title**<br>Employee Manager|
-|**Namespace**<br>com.example.employeeapp|
-|**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.148.0|
-|**Enable TypeScript**<br>False|
-|**Add Eslint configuration**<br>True, see https://www.npmjs.com/package/@sap-ux/eslint-plugin-fiori-tools#rules for the eslint rules.|
+# Enterprise Employee Management System (SAPUI5 | SAP Fiori)
 
-## employeeapp
+## Overview
 
-A responsive SAPUI5 Employee Management application.
+The Enterprise Employee Management System is a modern SAPUI5/Fiori application developed to demonstrate enterprise application development using SAPUI5, XML Views, JavaScript, and MVC architecture.
+
+The application enables HR teams to efficiently manage employee information through an intuitive dashboard with analytics, responsive forms, employee profile management, and professional SAP Fiori user experience.
+
+---
+
+## Live Demo
+
+*(Add after deployment)*
+
+**Application:** https://your-app-url
+
+---
+
+## GitHub Repository
+
+https://github.com/tirtheekhire/employee-management-system
+
+---
+
+## Technologies Used
+
+* SAPUI5 1.148
+* SAP Fiori Design
+* JavaScript (ES6)
+* XML Views
+* MVC Architecture
+* Local Storage
+* ResponsiveGridLayout
+* CSS3
+
+---
 
 ## Features
 
-- Add Employee
-- Edit Employee
-- Delete Employee
-- Search Employee
-- Local Storage Persistence
-- Responsive Design
-- SAPUI5 MVC Architecture
+### Dashboard
 
-## Technologies
+* Employee Dashboard
+* KPI Cards
+* Employee Statistics
+* Search Employee
+* Export Employee Data
+* Reset Data
 
-- SAPUI5
-- SAP Fiori
-- JavaScript
-- XML Views
-- JSON Model
+### Employee Management
 
-### Starting the generated app
+* Add Employee
+* Edit Employee
+* Delete Employee
+* Employee Details Dialog
+* Employee Profile Photo
+* Employee ID Auto Generation
 
--   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated application, run the following from the generated application root folder:
+### Validation
 
-```
-    npm start
-```
+* Mandatory Field Validation
+* Email Validation
+* Mobile Number Validation
+* Date Validation
+* Duplicate Employee Prevention
 
-#### Pre-requisites:
+### Employee Profile
 
-1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
+* Profile Photo Upload
+* Automatic Image Compression
+* Center Crop
+* Local Storage Persistence
 
+### Responsive Design
 
+* Mobile Friendly
+* Tablet Friendly
+* Desktop Friendly
+* SAP Horizon Inspired UI
+
+---
+
+## Project Structure
+
+webapp/
+
+* controller/
+* css/
+* fragment/
+* model/
+* service/
+* util/
+* view/
+* Component.js
+* manifest.json
+
+---
+
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Add Employee
+
+![Add Employee](screenshots/add-employee.png)
+
+### Employee Details
+
+![Employee Details](screenshots/employee-details.png)
+
+## Validation
+
+![Validation](screenshots/validation.png)
+
+## Responsive Design
+
+![Responsive](screenshots/responsive.png)
+
+---
+
+## Future Enhancements
+
+* Employee Attendance
+* Leave Management
+* Department Analytics
+* Charts & Reports
+* Dark Mode
+* PDF Export
+* Excel Import
+* Backend Integration (CAP/ABAP)
+* SAP SuccessFactors Integration
+
+---
+
+## Author
+
+Developed using SAPUI5 and SAP Fiori as a portfolio project to demonstrate enterprise application development skills.
