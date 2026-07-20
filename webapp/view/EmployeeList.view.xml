@@ -74,6 +74,7 @@ xmlns:form="sap.ui.layout.form">
           <ToolbarSpacer/>
           <Button icon="sap-icon://sort-ascending" press="onSortAscending"/>
           <Button icon="sap-icon://sort-descending" press="onSortDescending"/>
+          <Button text="Load Demo Data" icon="sap-icon://display" type="Accept" press="onLoadDemoData"/>
           <Button text="Export" icon="sap-icon://download" press="onExportCSV"/>
 					<Button id="_IDGenButton2"
 					text="Reset Data"

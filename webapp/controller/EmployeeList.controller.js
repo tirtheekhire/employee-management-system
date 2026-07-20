@@ -63,9 +63,143 @@ sap.ui.define([
 			localStorage.removeItem("employees");
 			var oModel = this.getView().getModel();
 			oModel.setProperty("/employees", []);
-			this.getOwnerComponent().updateDashboardCounts();
+			this.updateCounts();
 			oModel.refresh(true);
 			this.showToast("Data Cleared");
+		},
+
+		onLoadDemoData: function () {
+			var oModel = this.getView().getModel();
+			var aDemoEmployees = [
+				{
+					EmployeeId: "EMP001",
+					Name: "Alice Johnson",
+					Email: "alice.johnson@example.com",
+					Mobile: "9876543210",
+					Gender: "Female",
+					DateOfBirth: "1990-05-12",
+					Department: "Human Resources",
+					Role: "HR Manager",
+					EmploymentType: "Full-Time",
+					Status: "Active",
+					JoiningDate: "2018-09-01",
+					Manager: "David Lee",
+					Address1: "123 Maple Street",
+					Address2: "",
+					City: "Seattle",
+					State: "WA",
+					Country: "USA",
+					Pincode: "98101",
+					Experience: "6",
+					Salary: "85000",
+					Education: "MBA",
+					Skills: "Recruitment, Employee Relations",
+					EmergencyContact: "Michael Johnson",
+					EmergencyPhone: "9876501234",
+					BloodGroup: "A+",
+					Notes: "Top performer"
+				},
+				{
+					EmployeeId: "EMP002",
+					Name: "Brian Patel",
+					Email: "brian.patel@example.com",
+					Mobile: "9765432101",
+					Gender: "Male",
+					DateOfBirth: "1988-11-20",
+					Department: "Finance",
+					Role: "Finance Analyst",
+					EmploymentType: "Full-Time",
+					Status: "Active",
+					JoiningDate: "2019-03-15",
+					Manager: "Samantha Green",
+					Address1: "450 Harbor Drive",
+					Address2: "Apt 22B",
+					City: "San Francisco",
+					State: "CA",
+					Country: "USA",
+					Pincode: "94105",
+					Experience: "5",
+					Salary: "92000",
+					Education: "B.Com",
+					Skills: "Budgeting, Reporting",
+					EmergencyContact: "Meera Patel",
+					EmergencyPhone: "9765401234",
+					BloodGroup: "B+",
+					Notes: "Certified CPA"
+				},
+				{
+					EmployeeId: "EMP003",
+					Name: "Carlos Garcia",
+					Email: "carlos.garcia@example.com",
+					Mobile: "9654321098",
+					Gender: "Male",
+					DateOfBirth: "1992-08-03",
+					Department: "Engineering",
+					Role: "Software Engineer",
+					EmploymentType: "Full-Time",
+					Status: "On Leave",
+					JoiningDate: "2021-01-10",
+					Manager: "Angela Martin",
+					Address1: "89 Elm Street",
+					Address2: "",
+					City: "Austin",
+					State: "TX",
+					Country: "USA",
+					Pincode: "73301",
+					Experience: "3",
+					Salary: "78000",
+					Education: "B.Tech",
+					Skills: "JavaScript, UI5",
+					EmergencyContact: "Isabel Garcia",
+					EmergencyPhone: "9654321000",
+					BloodGroup: "O+",
+					Notes: "Working on portal redesign"
+				},
+				{
+					EmployeeId: "EMP004",
+					Name: "Diana Smith",
+					Email: "diana.smith@example.com",
+					Mobile: "9543210987",
+					Gender: "Female",
+					DateOfBirth: "1995-04-27",
+					Department: "Sales",
+					Role: "Sales Executive",
+					EmploymentType: "Contract",
+					Status: "Inactive",
+					JoiningDate: "2020-06-22",
+					Manager: "Oliver Brown",
+					Address1: "210 Oak Avenue",
+					Address2: "Suite 3",
+					City: "Chicago",
+					State: "IL",
+					Country: "USA",
+					Pincode: "60601",
+					Experience: "4",
+					Salary: "67000",
+					Education: "BBA",
+					Skills: "Client Relations, Negotiation",
+					EmergencyContact: "Michelle Smith",
+					EmergencyPhone: "9543201234",
+					BloodGroup: "AB+",
+					Notes: "Available after contract ends"
+				}
+			];
+			EmployeeService.setEmployees(oModel, aDemoEmployees);
+			this._updateRoles(aDemoEmployees);
+			this.updateCounts();
+			oModel.refresh(true);
+			this.showToast("Demo data loaded successfully");
+		},
+
+		_updateRoles: function (aEmployees) {
+			var oModel = this.getView().getModel();
+			var aRoles = ["ALL"];
+			aEmployees.forEach(function (employee) {
+				if (!aRoles.includes(employee.Role)) {
+					aRoles.push(employee.Role);
+				}
+			});
+			oModel.setProperty("/roles", aRoles);
 		},
 
 		// click on employee card
