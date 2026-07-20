@@ -28,12 +28,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: npm
-          cache-dependency-path: ../webapp/package-lock.json
 
       - name: Install dependencies
         working-directory: employeeapp
-        run: npm ci
+        run: npm install
 
       - name: Build SAPUI5 application
         working-directory: employeeapp
@@ -42,7 +40,7 @@ jobs:
       - name: Upload production build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ../dist
+          path: employeeapp/dist
 
   deploy:
     environment:
