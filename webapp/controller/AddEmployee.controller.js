@@ -33,6 +33,48 @@ sap.ui.define([
       return sEmployeeId;
     },
 
+    // Helper function to scroll to the first invalid field
+    _scrollToFirstInvalidField: function () {
+      var aFieldIds = [
+        "nameInput",
+        "emailInput",
+        "mobileInput",
+        "genderSelect",
+        "departmentSelect",
+        "roleInput",
+        "employmentTypeSelect",
+        "statusSelect",
+        "joiningDatePicker"
+      ];
+      var oFirstInvalidField = null;
+      for (var i = 0; i < aFieldIds.length; i++) {
+        var oField = this.byId(aFieldIds[i]);
+        if (
+          oField &&
+          oField.getValueState &&
+          oField.getValueState() === "Error"
+        ) {
+          oFirstInvalidField = oField;
+          break;
+        }
+      }
+      if (!oFirstInvalidField) {
+        return;
+      }
+      // Focus the invalid field
+      oFirstInvalidField.focus();
+      // Scroll to the invalid field
+      setTimeout(function () {
+        var oDomRef = oFirstInvalidField.getDomRef();
+        if (oDomRef) {
+          oDomRef.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+          });
+        }
+      }, 200);
+    },
+
     //reset input fields
     _onRouteMatched: function () {
       //reset fields
@@ -260,6 +302,8 @@ sap.ui.define([
         Notes: notes,
       };
       if (!Validation.validateEmployeeForm(this)) {
+        this.showToast("Please correct the highlighted fields");
+        this._scrollToFirstInvalidField();
         return;
       }
       if (this._isEditMode) {
