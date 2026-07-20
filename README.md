@@ -18,7 +18,7 @@ The application enables HR teams to efficiently manage employee information thro
 
 ## GitHub Repository
 
-https://github.com/tirtheekhire/employee-management-ui5
+https://github.com/tirtheekhire/employee-management-system
 
 ---
 
